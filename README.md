@@ -1,8 +1,8 @@
-# Zeplin OpenAPI Specifications
+# Zeplin's OpenAPI Description
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![OpenAPI: v3.0](https://img.shields.io/badge/OpenAPI-v3.0-brightgreen.svg)](https://www.openapis.org)
 
-This repository contains [OpenAPI specifications](https://www.openapis.org) for [Zeplin API](https://docs.zeplin.dev).
+This repository contains [OpenAPI descriptions](https://www.openapis.org) for the [Zeplin API](https://docs.zeplin.dev).
 
 ## What is OpenAPI
 
@@ -12,7 +12,7 @@ From the [OpenAPI Specification](https://spec.openapis.org/oas/v3.0.0):
 
 ## Descriptions
 
-You can find descriptions in the `/descriptions` directory. We support only OpenAPI 3.0.
+You can find the descriptions in the `/descriptions` directory.
 
 ## License
 
@@ -20,4 +20,4 @@ This project is licensed under [MIT license](LICENSE).
 
 ## Contact
 
-Ping us at dx@zeplin.io for any feedback or questions.
+Ping us at dx@zeplin.io for any feedback or questions. You can also find us in the [Zeplin Developer Slack](https://zpl.io/zeplin-dev-slack) group!
