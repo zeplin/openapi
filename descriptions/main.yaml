@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Zeplin API
   description: Access your resources in Zeplin
-  version: 1.0.0
+  version: 1.1.0
   contact:
     name: Zeplin
     url: https://zeplin.io
@@ -1162,6 +1162,58 @@ paths:
               examples:
                 response:
                   $ref: "#/components/examples/screenSection"
+  "/v1/projects/{project_id}/screen_variants":
+    get:
+      tags:
+        - Screens
+      summary: Get screen variants
+      description: List all screen variants of the project
+      operationId: GetScreenVariants
+      parameters:
+        - $ref: "#/components/parameters/project_id"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ScreenVariant"
+              examples:
+                response:
+                  value:
+                    - $ref: "#/components/examples/screenVariant/value"
+        "404":
+          $ref: "#/components/responses/projectNotFound"
+        "422":
+          $ref: "#/components/responses/projectArchived"
+  "/v1/projects/{project_id}/screen_variants/{variant_id}":
+    get:
+      tags:
+        - Screens
+      summary: Get a single screen variant
+      description: Get a screen variant by id
+      operationId: GetScreenVariant
+      parameters:
+        - $ref: "#/components/parameters/project_id"
+        - $ref: "#/components/parameters/screen_variant_id"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScreenVariant"
+              examples:
+                response:
+                  $ref: "#/components/examples/screenVariant"
+        "404":
+          $ref: "#/components/responses/projectOrScreenVariantNotFound"
+        "422":
+          $ref: "#/components/responses/projectArchived"
   "/v1/projects/{project_id}/colors":
     get:
       tags:
@@ -3186,6 +3238,28 @@ components:
         section:
           $ref: "#/components/schemas/EntityReference"
           description: Reference of the section that contains the screen
+        variant:
+          type: object
+          required:
+            - value
+            - group
+          properties:
+            value:
+              type: string
+              description: Value for this variant of the screen
+            group:
+              type: object
+              description: Variant group that contains the screen
+              required:
+                - id
+                - name
+              properties:
+                id:
+                  type: string
+                  description: Unique id of the screen variant
+                name:
+                  type: string
+                  description: Name of the screen variant
       example:
         $ref: "#/components/examples/screen"
     ScreenNote:
@@ -3289,6 +3363,37 @@ components:
           description: The description of the screen section
       example:
         $ref: "#/components/examples/screenSection"
+    ScreenVariant:
+      title: Screen Variant Group
+      type: object
+      required:
+        - id
+        - name
+        - variants
+      properties:
+        id:
+          type: string
+          description: The unique id of the screen variant
+        name:
+          type: string
+          description: The name of the screen variant
+        variants:
+          type: array
+          items:
+            type: object
+            required:
+              - screen_id
+              - value
+            properties:
+              screen_id:
+                type: string
+                description: Unique id of the variant screen
+              value:
+                type: string
+                description: Value for the variant
+          description: Possible values that the variant can take
+      example:
+        $ref: "#/components/examples/screenVariant"
     ScreenVersion:
       title: Screen Version
       type: object
@@ -9691,6 +9796,11 @@ components:
         number_of_versions: 4
         section:
           id: 5db81e6e6a4462065f04d932
+        variant:
+          value: Default
+          group:
+            id: 607437cd62d37a0bc869fc63
+            name: Login
     screenNote:
       summary: Screen Note
       value:
@@ -9778,6 +9888,18 @@ components:
           $ref: "#/components/examples/colorData/value"
         links:
           - $ref: "#/components/examples/link/value"
+    screenVariant:
+      summary: Screen Variant Group
+      value:
+        id: 607437cd62d37a0bc869fc63
+        name: Login
+        variants:
+          - screen_id: 5dbad85a76ea51c1f35b6f69
+            value: Default
+          - screen_id: 6074389b7bf31ebf66c8f09d
+            value: Loading
+          - screen_id: 607438a0351a38c53598671c
+            value: Error
     snapshotImage:
       summary: Snapshot Image
       value:
@@ -10223,6 +10345,14 @@ components:
       name: comment_id
       in: path
       description: Screen comment id
+      required: true
+      schema:
+        type: string
+        pattern: /^[0-9a-f]{24}$/i
+    screen_variant_id:
+      name: variant_id
+      in: path
+      description: Screen variant id
       required: true
       schema:
         type: string
@@ -10961,6 +11091,19 @@ components:
             Screen not found:
               value:
                 message: Screen not found
+    projectOrScreenVariantNotFound:
+      description: Project or screen variant not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          examples:
+            Project not found:
+              value:
+                message: Project not found
+            Screen variant not found:
+              value:
+                message: Screen variant not found
     projectOrTextStyleNotFound:
       description: Project or text style not found
       content:
