@@ -3,7 +3,7 @@
   "info": {
     "title": "Zeplin API",
     "description": "Access your resources in Zeplin",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "contact": {
       "name": "Zeplin",
       "url": "https://zeplin.io",
@@ -1133,6 +1133,145 @@
         }
       }
     },
+    "/v1/organizations/{organization_id}/members/{member_id}/projects": {
+      "get": {
+        "tags": [
+          "Organizations"
+        ],
+        "summary": "Get a member's projects",
+        "description": "Get a list of projects that an organization member is a part of",
+        "operationId": "GetOrganizationMemberProjects",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/organization_id"
+          },
+          {
+            "$ref": "#/components/parameters/member_id"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Project"
+                  }
+                },
+                "examples": {
+                  "response": {
+                    "value": [
+                      {
+                        "$ref": "#/components/examples/project/value"
+                      },
+                      {
+                        "$ref": "#/components/examples/organizationProject/value"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User is restricted response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "User is restricted"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/organizationOrMemberNotFound"
+          }
+        }
+      }
+    },
+    "/v1/organizations/{organization_id}/members/{member_id}/styleguides": {
+      "get": {
+        "tags": [
+          "Organizations"
+        ],
+        "summary": "Get a member's styleguides",
+        "description": "Get a list of styleguides that an organization member is a part of",
+        "operationId": "GetOrganizationMemberStyleguides",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/organization_id"
+          },
+          {
+            "$ref": "#/components/parameters/member_id"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Styleguide"
+                  }
+                },
+                "examples": {
+                  "response": {
+                    "value": [
+                      {
+                        "$ref": "#/components/examples/styleguide/value"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User is restricted response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "User is restricted"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/organizationOrMemberNotFound"
+          }
+        }
+      }
+    },
     "/v1/projects": {
       "get": {
         "tags": [
@@ -1363,6 +1502,55 @@
           },
           "422": {
             "$ref": "#/components/responses/projectArchived"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Screens"
+        ],
+        "summary": "Create a new screen",
+        "description": "Create a new screen in the project",
+        "operationId": "CreateScreen",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/ScreenCreateBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityReference"
+                },
+                "examples": {
+                  "response": {
+                    "$ref": "#/components/examples/entityReference"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/cannotCreateAScreen"
+          },
+          "404": {
+            "$ref": "#/components/responses/projectOrScreenSectionNotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/notAProjectMemberOrArchivedOrScreenExists"
           }
         }
       }
@@ -1780,6 +1968,58 @@
             "$ref": "#/components/responses/projectArchived"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Screens"
+        ],
+        "summary": "Create a new screen version",
+        "description": "Create a new screen version in the project",
+        "operationId": "CreateScreenVersion",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          },
+          {
+            "$ref": "#/components/parameters/screen_id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/ScreenVersionCreateBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityReference"
+                },
+                "examples": {
+                  "response": {
+                    "$ref": "#/components/examples/entityReference"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/cannotCreateAScreenVersion"
+          },
+          "404": {
+            "$ref": "#/components/responses/projectOrScreenNotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/notAProjectMemberOrArchived"
+          }
+        }
       }
     },
     "/v1/projects/{project_id}/screens/{screen_id}/versions/{version_id}": {
@@ -1986,14 +2226,14 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ScreenVariant"
+                    "$ref": "#/components/schemas/ScreenVariantGroup"
                   }
                 },
                 "examples": {
                   "response": {
                     "value": [
                       {
-                        "$ref": "#/components/examples/screenVariant/value"
+                        "$ref": "#/components/examples/screenVariantGroup/value"
                       }
                     ]
                   }
@@ -2032,11 +2272,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ScreenVariant"
+                  "$ref": "#/components/schemas/ScreenVariantGroup"
                 },
                 "examples": {
                   "response": {
-                    "$ref": "#/components/examples/screenVariant"
+                    "$ref": "#/components/examples/screenVariantGroup"
                   }
                 }
               }
@@ -5177,35 +5417,7 @@
             "description": "Reference of the section that contains the screen"
           },
           "variant": {
-            "type": "object",
-            "required": [
-              "value",
-              "group"
-            ],
-            "properties": {
-              "value": {
-                "type": "string",
-                "description": "Value for this variant of the screen"
-              },
-              "group": {
-                "type": "object",
-                "description": "Variant group that contains the screen",
-                "required": [
-                  "id",
-                  "name"
-                ],
-                "properties": {
-                  "id": {
-                    "type": "string",
-                    "description": "Unique id of the screen variant"
-                  },
-                  "name": {
-                    "type": "string",
-                    "description": "Name of the screen variant"
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/schemas/ScreenVariant"
           }
         },
         "example": {
@@ -5349,6 +5561,23 @@
         }
       },
       "ScreenVariant": {
+        "title": "Screen Variant",
+        "type": "object",
+        "required": [
+          "value",
+          "group"
+        ],
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "Value for this variant of the screen"
+          },
+          "group": {
+            "$ref": "#/components/schemas/ScreenVariantGroupReference"
+          }
+        }
+      },
+      "ScreenVariantGroup": {
         "title": "Screen Variant Group",
         "type": "object",
         "required": [
@@ -5368,27 +5597,49 @@
           "variants": {
             "type": "array",
             "items": {
-              "type": "object",
-              "required": [
-                "screen_id",
-                "value"
-              ],
-              "properties": {
-                "screen_id": {
-                  "type": "string",
-                  "description": "Unique id of the variant screen"
-                },
-                "value": {
-                  "type": "string",
-                  "description": "Value for the variant"
-                }
-              }
-            },
-            "description": "Possible values that the variant can take"
+              "$ref": "#/components/schemas/ScreenVariantGroupValue"
+            }
           }
         },
         "example": {
-          "$ref": "#/components/examples/screenVariant"
+          "$ref": "#/components/examples/screenVariantGroup"
+        }
+      },
+      "ScreenVariantGroupReference": {
+        "title": "Screen Variant Group Reference",
+        "type": "object",
+        "description": "Variant group that contains the screen",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique id of the screen variant"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the screen variant"
+          }
+        }
+      },
+      "ScreenVariantGroupValue": {
+        "title": "Screen Variant Group Value",
+        "type": "object",
+        "required": [
+          "screen_id",
+          "value"
+        ],
+        "properties": {
+          "screen_id": {
+            "type": "string",
+            "description": "Unique id of the variant screen"
+          },
+          "value": {
+            "type": "string",
+            "description": "Value for the variant"
+          }
         }
       },
       "ScreenVersion": {
@@ -8432,6 +8683,92 @@
             "description": "Whether the user's membership is restricted to only the"
           }
         }
+      },
+      "ScreenCreateBody": {
+        "title": "Screen Create Body",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the screen"
+          },
+          "image": {
+            "type": "string",
+            "format": "binary",
+            "description": "Binary data of the screen image.\n\nThe image has to be in JPEG or PNG format, and its size cannot exceed 5MB.\n",
+            "x-valid-types": [
+              "jpeg",
+              "png"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "description": "Description for the screen"
+          },
+          "commit_message": {
+            "type": "string",
+            "description": "Commit message for the screen version"
+          },
+          "commit_color": {
+            "type": "string",
+            "enum": [
+              "yellow",
+              "orange",
+              "peach",
+              "green",
+              "turquoise"
+            ],
+            "description": "Commit color for the screen version"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Tags for the screen"
+          },
+          "section_id": {
+            "type": "string",
+            "description": "Unique id of the screen section"
+          }
+        },
+        "required": [
+          "name",
+          "image"
+        ]
+      },
+      "ScreenVersionCreateBody": {
+        "title": "Screen Version Create Body",
+        "type": "object",
+        "properties": {
+          "image": {
+            "type": "string",
+            "format": "binary",
+            "description": "Binary data of the screen image.\n\nThe image has to be in JPEG or PNG format, and its size cannot exceed 5MB.\n",
+            "x-valid-types": [
+              "jpeg",
+              "png"
+            ]
+          },
+          "commit_message": {
+            "type": "string",
+            "description": "Commit message for the screen version"
+          },
+          "commit_color": {
+            "type": "string",
+            "enum": [
+              "yellow",
+              "orange",
+              "peach",
+              "green",
+              "turquoise"
+            ],
+            "description": "Commit color for the screen version"
+          }
+        },
+        "required": [
+          "image"
+        ]
       },
       "ScreenNoteCreateBody": {
         "title": "Screen Note Create Body",
@@ -14416,7 +14753,7 @@
           ]
         }
       },
-      "screenVariant": {
+      "screenVariantGroup": {
         "summary": "Screen Variant Group",
         "value": {
           "id": "607437cd62d37a0bc869fc63",
@@ -15406,6 +15743,40 @@
           }
         }
       },
+      "cannotCreateAScreen": {
+        "description": "User cannot create a screen",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "examples": {
+              "response": {
+                "value": {
+                  "message": "Only editors (or higher) can create a screen in a project"
+                }
+              }
+            }
+          }
+        }
+      },
+      "cannotCreateAScreenVersion": {
+        "description": "User cannot create a screen version",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "examples": {
+              "response": {
+                "value": {
+                  "message": "Only editors (or higher) can create a screen version in a project"
+                }
+              }
+            }
+          }
+        }
+      },
       "cannotCreateAStyleguideColor": {
         "description": "User cannot create a styleguide color",
         "content": {
@@ -15941,6 +16312,33 @@
           }
         }
       },
+      "notAProjectMemberOrArchivedOrScreenExists": {
+        "description": "Not a project member or project archived or screen with name already exists",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "examples": {
+              "Not a member": {
+                "value": {
+                  "message": "User is not a member of the project"
+                }
+              },
+              "Project is archived": {
+                "value": {
+                  "message": "Project is archived"
+                }
+              },
+              "Screen with name already exists": {
+                "value": {
+                  "message": "Screen with name \"My Screen\" already exists in the project. You can create a new version for this screen instead."
+                }
+              }
+            }
+          }
+        }
+      },
       "notAStyleguideMemberOrArchived": {
         "description": "Not a styleguide member or styleguide archived",
         "content": {
@@ -16162,6 +16560,28 @@
               "Screen not found": {
                 "value": {
                   "message": "Screen not found"
+                }
+              }
+            }
+          }
+        }
+      },
+      "projectOrScreenSectionNotFound": {
+        "description": "Project or screen section not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "examples": {
+              "Project not found": {
+                "value": {
+                  "message": "Project not found"
+                }
+              },
+              "Screen section not found": {
+                "value": {
+                  "message": "Screen section not found"
                 }
               }
             }
