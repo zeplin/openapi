@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Zeplin API
   description: Access your resources in Zeplin
-  version: 1.2.0
+  version: 1.2.1
   contact:
     name: Zeplin
     url: https://zeplin.io
@@ -3755,7 +3755,6 @@ components:
       title: Version Commit
       type: object
       required:
-        - color
         - message
       properties:
         message:
@@ -8405,9 +8404,18 @@ components:
               enum:
                 - Component
         context:
-          $ref: "#/components/schemas/ProjectComponentEventContext"
+          $ref: "#/components/schemas/ProjectComponentDeletedEventContext"
         actor:
           $ref: "#/components/schemas/WebhookEventActor"
+    ProjectComponentDeletedEventContext:
+      title: Project Component Deleted Event Context
+      type: object
+      required:
+        - project
+      properties:
+        project:
+          description: Project that contains the component
+          $ref: "#/components/schemas/Project"
     ProjectComponentUpdatedEvent:
       title: Project Component Updated Event
       type: object
@@ -9156,9 +9164,18 @@ components:
               enum:
                 - Component
         context:
-          $ref: "#/components/schemas/StyleguideComponentEventContext"
+          $ref: "#/components/schemas/StyleguideComponentDeletedEventContext"
         actor:
           $ref: "#/components/schemas/WebhookEventActor"
+    StyleguideComponentDeletedEventContext:
+      title: Styleguide Component Deleted Event Context
+      type: object
+      required:
+        - styleguide
+      properties:
+        styleguide:
+          description: Styleguide that contains the component
+          $ref: "#/components/schemas/Styleguide"
     StyleguideComponentUpdatedEvent:
       title: Styleguide Component Updated Event
       type: object
