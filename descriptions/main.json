@@ -3,7 +3,7 @@
   "info": {
     "title": "Zeplin API",
     "description": "Access your resources in Zeplin",
-    "version": "1.2.1",
+    "version": "1.3.0",
     "contact": {
       "name": "Zeplin",
       "url": "https://zeplin.io",
@@ -4978,7 +4978,7 @@
       },
       "User": {
         "title": "User",
-        "description": "Basic info about Zeplin users.\n\nNote:\nThe email alias (the `email` field) is a Zeplin-only alias, which can be used with the Emailing API to send emails to Zeplin users.\n\nIn order a Zeplin app send an email to a Zeplin user:\n - Zeplin app should have been approved by Zeplin to use the Emailing API\n - The user should authorize the app so that it can send emails to the user through the Zeplin alias.\n\nIf you're interested in using the Emailing API, reach us at dx@zeplin.io.\n",
+        "description": "Basic info about Zeplin users.\n\nZeplin API does not expose any personal information to third-party clients. For this reason, the `email` field is a Zeplin-only alias by default.\n\nYou can get the original email addresses of members of your workspace by using a personal access token created with admin rights. Third-party (OAuth) applications are not allowed to access this information.\n\n☝️*Only organization admins (or higher) can retrieve the original email addresses using an admin token.*\n",
         "type": "object",
         "required": [
           "id",
@@ -5318,7 +5318,7 @@
               "member",
               "alien"
             ],
-            "description": "The role of the user in the organization"
+            "description": "The role of the user in the organization\n\n☝️Note that the Developer role maps to `member` and the Reviewer role maps to `alien` in the API.\n"
           },
           "restricted": {
             "type": "boolean",
@@ -8642,7 +8642,7 @@
               "member",
               "alien"
             ],
-            "description": "The role of the user in the organization"
+            "description": "The role of the user in the organization\n\n☝️Note that the Developer role maps to `member` and the Reviewer role maps to `alien` in the API.\n"
           },
           "restricted": {
             "type": "boolean",
@@ -8675,7 +8675,7 @@
               "member",
               "alien"
             ],
-            "description": "The role of the user in the organization"
+            "description": "The role of the user in the organization\n\n☝️Note that the Developer role maps to `member` and the Reviewer role maps to `alien` in the API.\n"
           },
           "restricted": {
             "type": "boolean",
@@ -15629,7 +15629,7 @@
       "organization_role": {
         "name": "role",
         "in": "query",
-        "description": "Filter by role\n\n**Note:** Please prefer multiple parameter instances over comma-separated values.\n\nExample: `?role=owner&role=admin`\n",
+        "description": "Filter by role\n\n☝️Note that the Developer role maps to `member` and the Reviewer role maps to `alien` in the API.\n\n**Note:** Please prefer multiple parameter instances over comma-separated values.\n\nExample: `?role=owner&role=admin`\n",
         "required": false,
         "schema": {
           "type": "array",
@@ -15640,7 +15640,8 @@
               "owner",
               "admin",
               "editor",
-              "member"
+              "member",
+              "alien"
             ]
           }
         }
