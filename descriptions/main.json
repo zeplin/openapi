@@ -3,7 +3,7 @@
   "info": {
     "title": "Zeplin API",
     "description": "Access your resources in Zeplin",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "contact": {
       "name": "Zeplin",
       "url": "https://zeplin.io",
@@ -67,6 +67,27 @@
             "description": "RECOMMENDED. An opaque value used by the client to maintain state between the request and callback.",
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "code_challenge",
+            "in": "query",
+            "description": "RECOMMENDED. A PKCE code challenge derived from the code verifier, to be verified against later.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code_challenge_method",
+            "in": "query",
+            "description": "RECOMMENDED. PKCE code verifier transformation method.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "plain",
+                "S256"
+              ],
+              "default": "S256"
             }
           }
         ],
@@ -178,6 +199,30 @@
                     "value": {
                       "message": "invalid_grant",
                       "detail": "Provided `refresh_token` is malformed"
+                    }
+                  },
+                  "Code challenge is invalid": {
+                    "value": {
+                      "message": "invalid_grant",
+                      "detail": "Provided `code_challenge` is invalid"
+                    }
+                  },
+                  "Code challenge method is invalid": {
+                    "value": {
+                      "message": "invalid_grant",
+                      "detail": "Provided `code_challenge_method` is invalid"
+                    }
+                  },
+                  "Code verifier is required": {
+                    "value": {
+                      "message": "invalid_grant",
+                      "detail": "`code_verifier` is required"
+                    }
+                  },
+                  "Code verifier is incorrect": {
+                    "value": {
+                      "message": "invalid_grant",
+                      "detail": "Provided `code_verifier` is incorrect"
                     }
                   }
                 }
@@ -8560,8 +8605,7 @@
           "grant_type",
           "code",
           "redirect_uri",
-          "client_id",
-          "client_secret"
+          "client_id"
         ],
         "properties": {
           "grant_type": {
@@ -8584,7 +8628,11 @@
           },
           "client_secret": {
             "type": "string",
-            "description": "The `client_secret` of your Zeplin app"
+            "description": "The `client_secret` of your Zeplin app\n\n**Note**: `client_secret` is required for `code` values obtained without using a PKCE `code_challenge` value.\n\n**Warning**: `client_secret` property should only be used in a server-side application. \nIf your Zeplin app is a public client, you should use PKCE authorization flow.\n"
+          },
+          "code_verifier": {
+            "type": "string",
+            "description": "A cryptographically random string that is used to correlate the authorization request to the token request"
           }
         }
       },
@@ -8594,8 +8642,7 @@
         "required": [
           "grant_type",
           "refresh_token",
-          "client_id",
-          "client_secret"
+          "client_id"
         ],
         "properties": {
           "grant_type": {
@@ -8614,7 +8661,11 @@
           },
           "client_secret": {
             "type": "string",
-            "description": "The `client_secret` of your Zeplin app"
+            "description": "The `client_secret` of your Zeplin app\n\n**Note**: `client_secret` is required for `code` values obtained without using a PKCE `code_challenge` value.\n\n**Warning**: `client_secret` property should only be used in a server-side application. \nIf your Zeplin app is a public client, you should use PKCE authorization flow.\n"
+          },
+          "code_verifier": {
+            "type": "string",
+            "description": "A cryptographically random string that is used to correlate the authorization request to the token request"
           }
         }
       },
