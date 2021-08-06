@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Zeplin API
   description: Access your resources in Zeplin
-  version: 1.4.0
+  version: 1.4.1
   contact:
     name: Zeplin
     url: https://zeplin.io
@@ -549,13 +549,17 @@ paths:
                   value:
                     message: Organization admin cannot be restricted
         "402":
-          description: Not enough seats response
+          description: Not allowed in current plan response
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
               examples:
-                response:
+                Role not allowed response:
+                  value:
+                    message: '"member" role is not allowed in your workspace, contact us to learn
+                      more: support@zeplin.io'
+                Not enough seats response:
                   value:
                     message: "Looks like you reached the member limit of your organization, contact
                       us to learn more: support@zeplin.io"
@@ -633,6 +637,21 @@ paths:
                 response:
                   value:
                     message: Organization admin cannot be restricted
+        "402":
+          description: Not allowed in current plan response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                Role not allowed response:
+                  value:
+                    message: '"member" role is not allowed in your workspace, contact us to learn
+                      more: support@zeplin.io'
+                Not enough seats response:
+                  value:
+                    message: "Looks like you reached the member limit of your organization, contact
+                      us to learn more: support@zeplin.io"
         "403":
           description: User is restricted or not allowed response
           content:
