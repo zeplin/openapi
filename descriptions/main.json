@@ -3,7 +3,7 @@
   "info": {
     "title": "Zeplin API",
     "description": "Access your resources in Zeplin",
-    "version": "1.4.1",
+    "version": "1.4.2",
     "contact": {
       "name": "Zeplin",
       "url": "https://zeplin.io",
@@ -8236,13 +8236,13 @@
         "required": [
           "colors",
           "text_styles",
-          "spacings"
+          "spacing"
         ],
         "properties": {
           "colors": {
             "$ref": "#/components/schemas/ColorDesignTokens"
           },
-          "spacings": {
+          "spacing": {
             "$ref": "#/components/schemas/SpacingDesignTokens"
           },
           "text_styles": {
@@ -14575,7 +14575,7 @@
               }
             }
           },
-          "spacings": {
+          "spacing": {
             "xs-spacing": {
               "value": 16,
               "metadata": {
@@ -15039,7 +15039,7 @@
               }
             }
           },
-          "spacings": {
+          "spacing": {
             "xs-spacing": {
               "value": 16,
               "metadata": {

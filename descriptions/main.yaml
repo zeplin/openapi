@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Zeplin API
   description: Access your resources in Zeplin
-  version: 1.4.1
+  version: 1.4.2
   contact:
     name: Zeplin
     url: https://zeplin.io
@@ -5491,11 +5491,11 @@ components:
       required:
         - colors
         - text_styles
-        - spacings
+        - spacing
       properties:
         colors:
           $ref: "#/components/schemas/ColorDesignTokens"
-        spacings:
+        spacing:
           $ref: "#/components/schemas/SpacingDesignTokens"
         text_styles:
           $ref: "#/components/schemas/TextStyleDesignTokens"
@@ -10008,7 +10008,7 @@ components:
               resource:
                 id: 5dbad85a76ea51c1f35b6f69
                 type: Color
-        spacings:
+        spacing:
           xs-spacing:
             value: 16
             metadata:
@@ -10333,7 +10333,7 @@ components:
               resource:
                 id: 5dbad85a76ea51c1f35b6f69
                 type: Color
-        spacings:
+        spacing:
           xs-spacing:
             value: 16
             metadata:
