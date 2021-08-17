@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Zeplin API
   description: Access your resources in Zeplin
-  version: 1.4.2
+  version: 1.5.0
   contact:
     name: Zeplin
     url: https://zeplin.io
@@ -1551,6 +1551,7 @@ paths:
         - $ref: "#/components/parameters/project_id"
         - $ref: "#/components/parameters/filter_by_section_id"
         - $ref: "#/components/parameters/sort_components"
+        - $ref: "#/components/parameters/include_latest_version"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/offset"
       responses:
@@ -1580,6 +1581,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/project_id"
         - $ref: "#/components/parameters/component_id"
+        - $ref: "#/components/parameters/include_latest_version"
       responses:
         "200":
           description: Successful response
@@ -2250,6 +2252,7 @@ paths:
         - $ref: "#/components/parameters/sort_components"
         - $ref: "#/components/parameters/linked_project"
         - $ref: "#/components/parameters/linked_styleguide"
+        - $ref: "#/components/parameters/include_latest_version"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/offset"
       responses:
@@ -2285,6 +2288,7 @@ paths:
         - $ref: "#/components/parameters/component_id"
         - $ref: "#/components/parameters/linked_project"
         - $ref: "#/components/parameters/linked_styleguide"
+        - $ref: "#/components/parameters/include_latest_version"
       responses:
         "200":
           description: Successful response
@@ -3974,6 +3978,11 @@ components:
           items:
             $ref: "#/components/schemas/ComponentVariantProperty"
           description: Variant properties of the component
+        latest_version:
+          $ref: "#/components/schemas/ComponentVersion"
+          description: Design data in the latest version of the component. This exists if
+            the related endpoint parameter (`include_latest_version=true`) is
+            provided in component endpoints.
       example:
         $ref: "#/components/examples/component"
     ComponentSection:
@@ -10921,6 +10930,14 @@ components:
           - constant
           - original
         default: kebab
+    include_latest_version:
+      name: include_latest_version
+      in: query
+      description: Whether to include the latest version data in the Component object
+      required: false
+      schema:
+        type: boolean
+        default: false
   responses:
     cannotAccessProjectWebhook:
       description: User cannot access project webhook
