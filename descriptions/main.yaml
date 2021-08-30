@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Zeplin API
   description: Access your resources in Zeplin
-  version: 1.5.0
+  version: 1.6.0
   contact:
     name: Zeplin
     url: https://zeplin.io
@@ -921,6 +921,129 @@ paths:
           $ref: "#/components/responses/projectNotFound"
         "422":
           $ref: "#/components/responses/projectArchived"
+    post:
+      tags:
+        - Projects
+      summary: Invite a member
+      description: Invite a member to the project.
+      operationId: InviteProjectMember
+      parameters:
+        - $ref: "#/components/parameters/project_id"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectMemberInviteBody"
+      responses:
+        "204":
+          $ref: "#/components/responses/noContent"
+        "402":
+          description: User limit is reached
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                response:
+                  value: "Looks like you reached the member limit for your project, contact us to
+                    learn more: support@zeplin.io"
+        "403":
+          description: Organization member not allowed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                response:
+                  value: Only organization admins (or higher) can add new members
+        "404":
+          $ref: "#/components/responses/projectNotFound"
+        "422":
+          description: Project is archived, invitee already member, or external members
+            disallowed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                Project is archived:
+                  value:
+                    message: Project is archived
+                Invitee already member:
+                  value:
+                    message: Invited user is already a member of the project
+                External members disallowed:
+                  value:
+                    message: The organization does not allow users from external domains
+        "423":
+          description: Project resource is locked response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                response:
+                  value:
+                    message: Project resource is locked. Please try again later.
+  "/v1/projects/{project_id}/members/{member_id}":
+    delete:
+      tags:
+        - Projects
+      summary: Remove a member
+      description: Remove a member from the project.
+      operationId: RemoveProjectMember
+      parameters:
+        - $ref: "#/components/parameters/project_id"
+        - $ref: "#/components/parameters/member_id"
+      responses:
+        "204":
+          $ref: "#/components/responses/noContent"
+        "403":
+          description: Organization member not allowed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                response:
+                  value: Only organization admins (or higher) can add remove members
+        "404":
+          description: Project or member not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                Project not found:
+                  value:
+                    message: Project not found
+                User is not a member of the project:
+                  value:
+                    message: User is not a member of the project
+        "422":
+          description: Project is archived or cannot remove owner
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                Project is archived:
+                  value:
+                    message: Project is archived
+                Cannot remove owner:
+                  value:
+                    message: Owner cannot leave the project
+        "423":
+          description: Project resource is locked response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                response:
+                  value:
+                    message: Project resource is locked. Please try again later.
   "/v1/projects/{project_id}/screens":
     get:
       tags:
@@ -1415,6 +1538,7 @@ paths:
         - $ref: "#/components/parameters/project_id"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/include_linked_styleguides"
       responses:
         "200":
           description: Successful response
@@ -1498,6 +1622,7 @@ paths:
         - $ref: "#/components/parameters/project_id"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/include_linked_styleguides"
       responses:
         "200":
           description: Successful response
@@ -1685,6 +1810,7 @@ paths:
         - $ref: "#/components/parameters/project_id"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/include_linked_styleguides"
       responses:
         "200":
           description: Successful response
@@ -2042,6 +2168,7 @@ paths:
         - $ref: "#/components/parameters/offset"
         - $ref: "#/components/parameters/linked_project"
         - $ref: "#/components/parameters/linked_styleguide"
+        - $ref: "#/components/parameters/include_linked_styleguides"
       responses:
         "200":
           description: Successful response
@@ -2131,6 +2258,7 @@ paths:
         - $ref: "#/components/parameters/offset"
         - $ref: "#/components/parameters/linked_project"
         - $ref: "#/components/parameters/linked_styleguide"
+        - $ref: "#/components/parameters/include_linked_styleguides"
       responses:
         "200":
           description: Successful response
@@ -2207,6 +2335,129 @@ paths:
           $ref: "#/components/responses/styleguideNotFound"
         "422":
           $ref: "#/components/responses/styleguideArchived"
+    post:
+      tags:
+        - Styleguides
+      summary: Invite a member
+      description: Invite a member to the styleguide.
+      operationId: InviteStyleguideMember
+      parameters:
+        - $ref: "#/components/parameters/styleguide_id"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StyleguideMemberInviteBody"
+      responses:
+        "204":
+          $ref: "#/components/responses/noContent"
+        "402":
+          description: User limit is reached
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                response:
+                  value: "Looks like you reached the member limit for your styleguide, contact us
+                    to learn more: support@zeplin.io"
+        "403":
+          description: Organization member not allowed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                response:
+                  value: Only organization admins (or higher) can add new members
+        "404":
+          $ref: "#/components/responses/projectNotFound"
+        "422":
+          description: Styleguide is archived, invitee already member, or external members
+            disallowed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                Styleguide is archived:
+                  value:
+                    message: Styleguide is archived
+                Invitee already member:
+                  value:
+                    message: Invited user is already a member of the styleguide
+                External members disallowed:
+                  value:
+                    message: The organization does not allow users from external domains
+        "423":
+          description: Styleguide resource is locked response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                response:
+                  value:
+                    message: Styleguide resource is locked. Please try again later.
+  "/v1/styleguides/{styleguide_id}/members/{member_id}":
+    delete:
+      tags:
+        - Styleguides
+      summary: Remove a member
+      description: Remove a member from the styleguide.
+      operationId: RemoveStyleguideMember
+      parameters:
+        - $ref: "#/components/parameters/styleguide_id"
+        - $ref: "#/components/parameters/member_id"
+      responses:
+        "204":
+          $ref: "#/components/responses/noContent"
+        "403":
+          description: Organization member not allowed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                response:
+                  value: Only organization admins (or higher) can add remove members
+        "404":
+          description: Styleguide or member not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                Styleguide not found:
+                  value:
+                    message: Styleguide not found
+                User is not a member of the styleguide:
+                  value:
+                    message: User is not a member of the styleguide
+        "422":
+          description: Styleguide is archived or cannot remove owner
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                Styleguide is archived:
+                  value:
+                    message: Styleguide is archived
+                Cannot remove owner:
+                  value:
+                    message: Owner cannot leave the styleguide
+        "423":
+          description: Styleguide resource is locked response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                response:
+                  value:
+                    message: Styleguide resource is locked. Please try again later.
   "/v1/styleguides/{styleguide_id}/linked_projects":
     get:
       tags:
@@ -2410,6 +2661,7 @@ paths:
         - $ref: "#/components/parameters/offset"
         - $ref: "#/components/parameters/linked_project"
         - $ref: "#/components/parameters/linked_styleguide"
+        - $ref: "#/components/parameters/include_linked_styleguides"
       responses:
         "200":
           description: Successful response
@@ -3057,6 +3309,9 @@ components:
         a:
           type: number
           description: Alpha component of the color
+        source:
+          $ref: "#/components/schemas/ResourceSource"
+          description: Source of the color–either `project` or `styleguide`.
       example:
         $ref: "#/components/examples/color"
     ColorData:
@@ -3898,6 +4153,9 @@ components:
             justify
         color:
           $ref: "#/components/schemas/ColorData"
+        source:
+          $ref: "#/components/schemas/ResourceSource"
+          description: Source of the text style–either `project` or `styleguide`.
       example:
         $ref: "#/components/examples/textStyle"
     TextStyleData:
@@ -4270,6 +4528,9 @@ components:
         section:
           $ref: "#/components/schemas/EntityReference"
           description: Reference of the section that contains the token
+        source:
+          $ref: "#/components/schemas/ResourceSource"
+          description: Source of the color–either `project` or `styleguide`.
       example:
         $ref: "#/components/examples/spacingToken"
     SpacingTokenColor:
@@ -5515,6 +5776,80 @@ components:
           $ref: "#/components/examples/projectDesignTokens"
         Styleguide Design Tokens:
           $ref: "#/components/examples/styleguideDesignTokens"
+    ResourceSource:
+      title: Resource Source
+      type: object
+      description: Source details for resource. It has to be either `project` or
+        `styleguide`.
+      properties:
+        project:
+          $ref: "#/components/schemas/ResourceProjectSource"
+        styleguide:
+          $ref: "#/components/schemas/ResourceStyleguideSource"
+      example:
+        $ref: "#/components/examples/resourceSourceForProject"
+      x-examples:
+        Project:
+          $ref: "#/components/examples/resourceSourceForProject"
+        Styleguide:
+          $ref: "#/components/examples/resourceSourceForStyleguide"
+    ResourceProjectSource:
+      title: Source Project
+      type: object
+      description: The source project of the resource
+      required:
+        - id
+        - name
+        - platform
+      properties:
+        id:
+          type: string
+          description: The unique id of the source project
+        name:
+          type: string
+          description: The name of the source project
+        platform:
+          type: string
+          enum:
+            - web
+            - ios
+            - android
+            - macos
+          description: The target platform of the source project
+        linked_styleguide:
+          $ref: "#/components/schemas/EntityReference"
+          description: Reference of the styleguide which the source project is linked to
+      example:
+        $ref: "#/components/examples/resourceProjectSource"
+    ResourceStyleguideSource:
+      title: Source Styleguide
+      type: object
+      description: The source styleguide of the resource
+      required:
+        - id
+        - name
+        - platform
+      properties:
+        id:
+          type: string
+          description: The unique id of the source styleguide
+        name:
+          type: string
+          description: The name of the source styleguide
+        platform:
+          type: string
+          enum:
+            - base
+            - web
+            - ios
+            - android
+            - macos
+          description: The target platform of the source styleguide
+        parent:
+          $ref: "#/components/schemas/EntityReference"
+          description: Reference of the parent styleguide of the source styleguide
+      example:
+        $ref: "#/components/examples/resourceStyleguideSource"
     SourceEnum:
       title: Source
       type: string
@@ -5949,6 +6284,30 @@ components:
         restricted:
           type: boolean
           description: Whether the user's membership is restricted to only the
+    ProjectMemberInviteBody:
+      title: Project Member Invite Body
+      type: object
+      properties:
+        handle:
+          type: string
+          description: |
+            Email, username or unique identifier of the user
+
+            Can also be `"me"` for joining the project as the current user
+      required:
+        - handle
+    StyleguideMemberInviteBody:
+      title: Styleguide Member Invite Body
+      type: object
+      properties:
+        handle:
+          type: string
+          description: |
+            Email, username or unique identifier of the user
+
+            Can also be `"me"` for joining the styleguide as the current user
+      required:
+        - handle
     ScreenCreateBody:
       title: Screen Create Body
       type: object
@@ -9523,6 +9882,13 @@ components:
         g: 152
         b: 5
         a: 1
+        source:
+          project:
+            id: 5db81e73e1e36ee19f138c1a
+            name: HAL 9000
+            platform: web
+            linked_styleguide:
+              id: 5db981be9df2b3e1bfa19ef2
     colorData:
       summary: Color Data
       value:
@@ -9722,6 +10088,32 @@ components:
         name: Discovery 1
         platform: web
         linked_styleguide:
+          id: 5db981be9df2b3e1bfa19ef2
+    resourceProjectSource:
+      summary: Source Project
+      value:
+        id: 5db81e73e1e36ee19f138c1a
+        name: HAL 9000
+        platform: web
+        linked_styleguide:
+          id: 5db981be9df2b3e1bfa19ef2
+    resourceSourceForProject:
+      summary: Source for Project
+      value:
+        project:
+          $ref: "#/components/examples/resourceProjectSource/value"
+    resourceSourceForStyleguide:
+      summary: Source for Styleguide
+      value:
+        styleguide:
+          $ref: "#/components/examples/resourceStyleguideSource/value"
+    resourceStyleguideSource:
+      summary: Source Styleguide
+      value:
+        id: 5db981be9df2b3e1bfa19ef2
+        name: Discovery 1
+        platform: web
+        parent:
           id: 5db981be9df2b3e1bfa19ef2
     entityReference:
       summary: Object Reference
@@ -10290,6 +10682,13 @@ components:
           $ref: "#/components/examples/spacingTokenColor/value"
         section:
           id: 5db81e6e6a4462065f04d932
+        source:
+          project:
+            id: 5db81e73e1e36ee19f138c1a
+            name: HAL 9000
+            platform: web
+            linked_styleguide:
+              id: 5db981be9df2b3e1bfa19ef2
     spacingTokenColor:
       summary: Spacing Token Color
       value:
@@ -10439,6 +10838,13 @@ components:
         text_align: left
         color:
           $ref: "#/components/examples/colorData/value"
+        source:
+          project:
+            id: 5db81e73e1e36ee19f138c1a
+            name: HAL 9000
+            platform: web
+            linked_styleguide:
+              id: 5db981be9df2b3e1bfa19ef2
     textStyleData:
       summary: Layer Text Style
       value:
@@ -11345,7 +11751,7 @@ components:
                 message: User is not a member of the styleguide
             Styleguide is archived:
               value:
-                message: Project is archived
+                message: Styleguide is archived
     notificationNotFound:
       description: Notification not found response
       content:
