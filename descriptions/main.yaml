@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Zeplin API
   description: Access your resources in Zeplin
-  version: 1.6.1
+  version: 1.7.0
   contact:
     name: Zeplin
     url: https://zeplin.io
@@ -485,6 +485,7 @@ paths:
         - $ref: "#/components/parameters/organization_id"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/handle"
       responses:
         "200":
           description: Successful response
@@ -499,15 +500,19 @@ paths:
                   value:
                     - $ref: "#/components/examples/organizationMember/value"
         "403":
-          description: User is restricted response
+          description: User is restricted or not allowed response
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
               examples:
-                response:
+                User is restricted response:
                   value:
                     message: User is restricted
+                User is not allowed response:
+                  value:
+                    message: Only organization admins (or higher) can filter organizaton members via
+                      email using their personal access tokens
         "404":
           $ref: "#/components/responses/organizationNotFound"
     post:
@@ -1152,6 +1157,37 @@ paths:
           $ref: "#/components/responses/projectOrScreenNotFound"
         "422":
           $ref: "#/components/responses/notAProjectMemberOrArchived"
+  "/v1/projects/{project_id}/screens/{screen_id}/components":
+    get:
+      tags:
+        - Screens
+      summary: Get screen components
+      description: List all components in the screen
+      operationId: GetScreenComponents
+      parameters:
+        - $ref: "#/components/parameters/project_id"
+        - $ref: "#/components/parameters/screen_id"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/include_latest_version"
+        - $ref: "#/components/parameters/include_linked_styleguides"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Component"
+              examples:
+                response:
+                  value:
+                    - $ref: "#/components/examples/component/value"
+        "404":
+          $ref: "#/components/responses/projectOrScreenNotFound"
+        "422":
+          $ref: "#/components/responses/projectArchived"
   "/v1/projects/{project_id}/screens/{screen_id}/notes":
     get:
       tags:
@@ -3137,12 +3173,8 @@ paths:
         - $ref: "#/components/parameters/notification_type"
         - name: id
           in: query
-          description: >
+          description: |
             Filter by id
-
-
-            **Note:** Please prefer multiple parameter instances over comma-separated values.
-
 
             Example: `?id=5fbe387f8c72ef23659fb500&id=602281f4783f72fccc045484`
           required: false
@@ -11265,9 +11297,6 @@ components:
         ☝️Note that the Developer role maps to `member` and the Reviewer role maps to `alien` in the API.
 
 
-        **Note:** Please prefer multiple parameter instances over comma-separated values.
-
-
         Example: `?role=owner&role=admin`
       required: false
       schema:
@@ -11291,12 +11320,8 @@ components:
     notification_type:
       name: type
       in: query
-      description: >
+      description: |
         Filter by type
-
-
-        **Note:** Please prefer multiple parameter instances over comma-separated values.
-
 
         Example: `?type=project.extension&type=styleguide.extension`
       required: false
@@ -11344,6 +11369,24 @@ components:
       schema:
         type: boolean
         default: false
+    handle:
+      name: handle
+      in: query
+      description: >
+        Filter organization members by email, username or unique identifier of
+        the user
+
+
+        ☝️Note that only organization admins (or higher) can filter members using email addresses.
+
+
+        Example: `?handle=zozo&handle=5d9caaecb4a3fa9bc9718686&handle=zozo%40zeplin.io`
+      required: false
+      schema:
+        type: array
+        uniqueItems: true
+        items:
+          type: string
   responses:
     cannotAccessProjectWebhook:
       description: User cannot access project webhook
