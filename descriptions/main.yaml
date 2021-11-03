@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Zeplin API
   description: Access your resources in Zeplin
-  version: 1.7.0
+  version: 1.7.1
   contact:
     name: Zeplin
     url: https://zeplin.io
@@ -5478,6 +5478,8 @@ components:
       properties:
         horizontal_offset:
           type: number
+        vertical_offset:
+          type: number
         vertical:
           $ref: "#/components/schemas/VerticalGrid"
         horizontal:
@@ -5513,6 +5515,8 @@ components:
         gutter_height:
           type: number
         row_height:
+          type: number
+        number_of_rows:
           type: number
       example:
         $ref: "#/components/examples/grid"
@@ -10158,6 +10162,7 @@ components:
     horizontalGrid:
       summary: Horizontal Grid
       value:
+        number_of_rows: 6
         gutter_height: 12
         row_height: 60
     hotspotBoundingRectangle:
@@ -10187,7 +10192,8 @@ components:
     grid:
       summary: Grid
       value:
-        horizontalOffset: 0,
+        horizontal_offset: 0
+        vertical_offset: 0
         vertical:
           $ref: "#/components/examples/verticalGrid/value"
         horizontal:
@@ -11007,10 +11013,10 @@ components:
     verticalGrid:
       summary: Vertical Grid
       value:
-        columnWidth: 60
-        numberOfCols: 12
-        guttersOnOutside: true
-        gutterWidth: 20
+        column_width: 60
+        number_of_cols: 12
+        gutters_on_outside: true
+        gutter_width: 20
     webhook:
       summary: Webhook
       value:
