@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Zeplin API
   description: Access your resources in Zeplin
-  version: 1.8.0
+  version: 1.8.1
   contact:
     name: Zeplin
     url: https://zeplin.io
@@ -6030,8 +6030,7 @@ components:
           type: string
           description: The code snippet
         language:
-          type: string
-          description: Language of the code snippet
+          $ref: "#/components/schemas/LanguageEnum"
       example:
         $ref: "#/components/examples/code"
     LanguageEnum:
