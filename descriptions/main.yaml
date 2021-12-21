@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Zeplin API
   description: Access your resources in Zeplin
-  version: 1.7.1
+  version: 1.8.0
   contact:
     name: Zeplin
     url: https://zeplin.io
@@ -173,7 +173,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/OrganizationSummary"
               examples:
-                response:
+                Organization Summary:
                   value:
                     - $ref: "#/components/examples/organizationSummary/value"
   "/v1/organizations/{organization_id}":
@@ -224,7 +224,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
               examples:
-                response:
+                Only organization admins (or higher) can access billing details response:
                   value:
                     message: Only organization admins (or higher) can access billing details
         "404":
@@ -250,7 +250,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Project"
               examples:
-                response:
+                Organization Projects:
                   value:
                     - $ref: "#/components/examples/organizationProject/value"
         "404":
@@ -274,7 +274,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/WorkflowStatus"
               examples:
-                response:
+                Organization Workflow Statuses:
                   value:
                     - $ref: "#/components/examples/workflowStatus/value"
         "404":
@@ -300,7 +300,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Styleguide"
               examples:
-                response:
+                Organization Styleguides:
                   value:
                     - $ref: "#/components/examples/organizationStyleguide/value"
         "404":
@@ -324,7 +324,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/User"
               examples:
-                response:
+                Successful response:
                   value:
                     - $ref: "#/components/examples/user/value"
         "403":
@@ -334,7 +334,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
               examples:
-                response:
+                User is restricted response:
                   value:
                     message: User is restricted
         "404":
@@ -368,7 +368,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/OrganizationWebhook"
               examples:
-                response:
+                Organization Webhooks:
                   value:
                     - $ref: "#/components/examples/webhook/value"
         "403":
@@ -496,7 +496,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/OrganizationMember"
               examples:
-                response:
+                Organization Members:
                   value:
                     - $ref: "#/components/examples/organizationMember/value"
         "403":
@@ -550,7 +550,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
               examples:
-                response:
+                Admin cannot be restricted response:
                   value:
                     message: Organization admin cannot be restricted
         "402":
@@ -604,7 +604,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
               examples:
-                response:
+                Organization resource is locked response:
                   value:
                     message: Organization resource is locked. Please try again later.
   "/v1/organizations/{organization_id}/members/{member_id}":
@@ -639,7 +639,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
               examples:
-                response:
+                Admin cannot be restricted response:
                   value:
                     message: Organization admin cannot be restricted
         "402":
@@ -692,7 +692,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
               examples:
-                response:
+                Organization resource is locked response:
                   value:
                     message: Organization resource is locked. Please try again later.
     delete:
@@ -748,7 +748,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
               examples:
-                response:
+                Organization resource is locked response:
                   value:
                     message: Organization resource is locked. Please try again later.
   "/v1/organizations/{organization_id}/members/{member_id}/projects":
@@ -773,7 +773,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Project"
               examples:
-                response:
+                Projects:
                   value:
                     - $ref: "#/components/examples/project/value"
                     - $ref: "#/components/examples/organizationProject/value"
@@ -784,7 +784,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
               examples:
-                response:
+                User is restricted response:
                   value:
                     message: User is restricted
         "404":
@@ -811,7 +811,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Styleguide"
               examples:
-                response:
+                Organization Styleguides:
                   value:
                     - $ref: "#/components/examples/styleguide/value"
         "403":
@@ -821,7 +821,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
               examples:
-                response:
+                User is restricted response:
                   value:
                     message: User is restricted
         "404":
@@ -848,7 +848,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Project"
               examples:
-                response:
+                Projects:
                   value:
                     - $ref: "#/components/examples/project/value"
                     - $ref: "#/components/examples/organizationProject/value"
@@ -919,7 +919,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/ProjectMember"
               examples:
-                response:
+                Project Members:
                   value:
                     - $ref: "#/components/examples/projectMember/value"
         "404":
@@ -950,7 +950,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
               examples:
-                response:
+                User limit is reached:
                   value: "Looks like you reached the member limit for your project, contact us to
                     learn more: support@zeplin.io"
         "403":
@@ -960,7 +960,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
               examples:
-                response:
+                Organization member not allowed:
                   value: Only organization admins (or higher) can add new members
         "404":
           $ref: "#/components/responses/projectNotFound"
@@ -988,7 +988,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
               examples:
-                response:
+                Project resource is locked response:
                   value:
                     message: Project resource is locked. Please try again later.
   "/v1/projects/{project_id}/members/{member_id}":
@@ -1011,7 +1011,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
               examples:
-                response:
+                Organization member not allowed:
                   value: Only organization admins (or higher) can add remove members
         "404":
           description: Project or member not found
@@ -1046,7 +1046,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
               examples:
-                response:
+                Project resource is locked response:
                   value:
                     message: Project resource is locked. Please try again later.
   "/v1/projects/{project_id}/screens":
@@ -1072,7 +1072,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Screen"
               examples:
-                response:
+                Screens:
                   value:
                     - $ref: "#/components/examples/screen/value"
         "404":
@@ -1210,7 +1210,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/ScreenNote"
               examples:
-                response:
+                Screen Notes:
                   value:
                     - $ref: "#/components/examples/screenNote/value"
         "404":
@@ -1368,7 +1368,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/ScreenVersionSummary"
               examples:
-                response:
+                Screen Versions:
                   value:
                     - $ref: "#/components/examples/screenVersionSummary/value"
         "404":
@@ -1480,7 +1480,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/ScreenSection"
               examples:
-                response:
+                Screen Sections:
                   value:
                     - $ref: "#/components/examples/screenSection/value"
         "404":
@@ -1528,7 +1528,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/ScreenVariantGroup"
               examples:
-                response:
+                Screen Variants:
                   value:
                     - $ref: "#/components/examples/screenVariantGroup/value"
         "404":
@@ -1585,7 +1585,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Color"
               examples:
-                response:
+                Project Colors:
                   value:
                     - $ref: "#/components/examples/color/value"
         "404":
@@ -1669,7 +1669,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/TextStyle"
               examples:
-                response:
+                Project Text Styles:
                   value:
                     - $ref: "#/components/examples/textStyle/value"
         "404":
@@ -1701,6 +1701,35 @@ paths:
           $ref: "#/components/responses/projectOrTextStyleNotFound"
         "422":
           $ref: "#/components/responses/notAProjectMemberOrArchived"
+  "/v1/projects/{project_id}/connected_components":
+    get:
+      tags:
+        - Connected Components
+      summary: Get project connected components
+      description: List all connected components of a project
+      operationId: GetProjectConnectedComponents
+      parameters:
+        - $ref: "#/components/parameters/project_id"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/include_linked_styleguides"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ConnectedComponent"
+              examples:
+                Connected Components:
+                  value:
+                    - $ref: "#/components/examples/connectedComponent/value"
+        "404":
+          $ref: "#/components/responses/projectNotFound"
+        "422":
+          $ref: "#/components/responses/projectArchived"
   "/v1/projects/{project_id}/components":
     get:
       tags:
@@ -1713,6 +1742,7 @@ paths:
         - $ref: "#/components/parameters/filter_by_section_id"
         - $ref: "#/components/parameters/sort_components"
         - $ref: "#/components/parameters/include_latest_version"
+        - $ref: "#/components/parameters/include_linked_styleguides"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/offset"
       responses:
@@ -1725,7 +1755,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Component"
               examples:
-                response:
+                Project Components:
                   value:
                     - $ref: "#/components/examples/component/value"
         "404":
@@ -1828,7 +1858,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/ComponentSection"
               examples:
-                response:
+                Project Component Sections:
                   value:
                     - $ref: "#/components/examples/componentSection/value"
         "404":
@@ -1946,7 +1976,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/ProjectWebhook"
               examples:
-                response:
+                Project Webhooks:
                   value:
                     - $ref: "#/components/examples/projectWebhook/value"
         "403":
@@ -2120,7 +2150,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Styleguide"
               examples:
-                response:
+                Styleguides:
                   value:
                     - $ref: "#/components/examples/styleguide/value"
         "404":
@@ -2215,7 +2245,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Color"
               examples:
-                response:
+                Styleguide Colors:
                   value:
                     - $ref: "#/components/examples/color/value"
         "404":
@@ -2305,7 +2335,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/TextStyle"
               examples:
-                response:
+                Styleguide Text Styles:
                   value:
                     - $ref: "#/components/examples/textStyle/value"
         "404":
@@ -2364,7 +2394,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/StyleguideMember"
               examples:
-                response:
+                Styleguide Members:
                   value:
                     - $ref: "#/components/examples/styleguideMember/value"
         "404":
@@ -2395,7 +2425,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
               examples:
-                response:
+                User limit is reached:
                   value: "Looks like you reached the member limit for your styleguide, contact us
                     to learn more: support@zeplin.io"
         "403":
@@ -2405,7 +2435,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
               examples:
-                response:
+                Organization member not allowed:
                   value: Only organization admins (or higher) can add new members
         "404":
           $ref: "#/components/responses/projectNotFound"
@@ -2433,7 +2463,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
               examples:
-                response:
+                Styleguiide resource is locked response:
                   value:
                     message: Styleguide resource is locked. Please try again later.
   "/v1/styleguides/{styleguide_id}/members/{member_id}":
@@ -2456,7 +2486,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
               examples:
-                response:
+                Organization member not allowed:
                   value: Only organization admins (or higher) can add remove members
         "404":
           description: Styleguide or member not found
@@ -2491,7 +2521,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
               examples:
-                response:
+                Styleguide resource is locked response:
                   value:
                     message: Styleguide resource is locked. Please try again later.
   "/v1/styleguides/{styleguide_id}/linked_projects":
@@ -2515,13 +2545,44 @@ paths:
                 items:
                   $ref: "#/components/schemas/Project"
               examples:
-                response:
+                Projects:
                   value:
                     - $ref: "#/components/examples/project/value"
         "404":
           $ref: "#/components/responses/styleguideNotFound"
         "422":
           $ref: "#/components/responses/styleguideArchived"
+  "/v1/styleguides/{styleguide_id}/connected_components":
+    get:
+      tags:
+        - Connected Components
+      summary: Get styleguide connected components
+      description: List all connected components of a project
+      operationId: GetStyleguideConnectedComponents
+      parameters:
+        - $ref: "#/components/parameters/styleguide_id"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/linked_project"
+        - $ref: "#/components/parameters/linked_styleguide"
+        - $ref: "#/components/parameters/include_linked_styleguides"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ConnectedComponent"
+              examples:
+                Connected Components:
+                  value:
+                    - $ref: "#/components/examples/connectedComponent/value"
+        "404":
+          $ref: "#/components/responses/projectNotFound"
+        "422":
+          $ref: "#/components/responses/projectArchived"
   "/v1/styleguides/{styleguide_id}/components":
     get:
       tags:
@@ -2539,6 +2600,7 @@ paths:
         - $ref: "#/components/parameters/sort_components"
         - $ref: "#/components/parameters/linked_project"
         - $ref: "#/components/parameters/linked_styleguide"
+        - $ref: "#/components/parameters/include_linked_styleguides"
         - $ref: "#/components/parameters/include_latest_version"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/offset"
@@ -2552,7 +2614,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Component"
               examples:
-                response:
+                Styleguide Components:
                   value:
                     - $ref: "#/components/examples/component/value"
         "404":
@@ -2803,7 +2865,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/StyleguideWebhook"
               examples:
-                response:
+                Styleguide Webhooks:
                   value:
                     - $ref: "#/components/examples/styleguideWebhook/value"
         "403":
@@ -2978,7 +3040,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Project"
               examples:
-                response:
+                Personal Projects:
                   value:
                     - $ref: "#/components/examples/project/value"
   /v1/users/me/styleguides:
@@ -3002,7 +3064,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Styleguide"
               examples:
-                response:
+                Personal Styleguides:
                   value:
                     - $ref: "#/components/examples/styleguide/value"
   /v1/users/me/webhooks:
@@ -3033,7 +3095,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/UserWebhook"
               examples:
-                response:
+                User Webhooks:
                   value:
                     - $ref: "#/components/examples/webhook/value"
     post:
@@ -3150,7 +3212,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Notification"
               examples:
-                response:
+                Notifications:
                   value:
                     - $ref: "#/components/examples/notification/value"
     patch:
@@ -3481,6 +3543,7 @@ components:
         - number_of_members
         - number_of_screens
         - number_of_components
+        - number_of_connected_components
         - number_of_colors
         - number_of_text_styles
         - number_of_spacing_tokens
@@ -3534,6 +3597,9 @@ components:
         number_of_components:
           type: integer
           description: The number of components exported to the project
+        number_of_connected_components:
+          type: integer
+          description: The number of connected components in the project
         number_of_text_styles:
           type: integer
           description: The number of text styles added to the project
@@ -4010,6 +4076,7 @@ components:
         - number_of_colors
         - number_of_text_styles
         - number_of_spacing_tokens
+        - number_of_connected_components
       properties:
         id:
           type: string
@@ -4050,6 +4117,9 @@ components:
         number_of_members:
           type: integer
           description: The number of members of the styleguide
+        number_of_connected_components:
+          type: integer
+          description: The number of connected components in the styleguide
         number_of_components:
           type: integer
           description: The number of components exported to the styleguide
@@ -4268,6 +4338,9 @@ components:
           items:
             $ref: "#/components/schemas/ComponentVariantProperty"
           description: Variant properties of the component
+        source:
+          $ref: "#/components/schemas/ResourceSource"
+          description: Source of the text style. Either `project` or `styleguide`.
         latest_version:
           $ref: "#/components/schemas/ComponentVersion"
           description: Design data in the latest version of the component. This exists if
@@ -5519,7 +5592,7 @@ components:
         number_of_rows:
           type: number
       example:
-        $ref: "#/components/examples/grid"
+        $ref: "#/components/examples/horizontalGrid"
     ColorDesignToken:
       type: object
       title: Color Design Token
@@ -5886,6 +5959,125 @@ components:
           description: Reference of the parent styleguide of the source styleguide
       example:
         $ref: "#/components/examples/resourceStyleguideSource"
+    ConnectedComponent:
+      title: Connected Component
+      type: object
+      required:
+        - components
+        - links
+      properties:
+        compontents:
+          description: Components that are connected
+          type: array
+          items:
+            $ref: "#/components/schemas/EntityReference"
+        file_path:
+          type: string
+          description: File path of the connected component from the source code
+        name:
+          type: string
+          description: Name of the connected component
+        description:
+          type: string
+          description: Description of the connected component
+        code:
+          $ref: "#/components/schemas/Code"
+        links:
+          type: array
+          description: Links of the connected component
+          items:
+            $ref: "#/components/schemas/ConnectedComponentLink"
+        source:
+          $ref: "#/components/schemas/ResourceSource"
+      example:
+        $ref: "#/components/examples/connectedComponent"
+    ConnectedComponentLink:
+      title: Connected Component Link
+      type: object
+      required:
+        - type
+        - url
+      properties:
+        type:
+          description: Type of the link
+          enum:
+            - custom
+            - github
+            - gitlab
+            - bitbucket
+            - storybook
+            - styleguidist
+        url:
+          type: string
+          description: Url of the link
+        name:
+          type: string
+          description: Name for custom links
+      example:
+        $ref: "#/components/examples/connectedComponentLink"
+      x-examples:
+        Link:
+          $ref: "#/components/examples/connectedComponentLink"
+        Custom Link:
+          $ref: "#/components/examples/connectedComponentCustomLink"
+    Code:
+      title: Code
+      type: object
+      required:
+        - snippet
+      properties:
+        snippet:
+          type: string
+          description: The code snippet
+        language:
+          type: string
+          description: Language of the code snippet
+      example:
+        $ref: "#/components/examples/code"
+    LanguageEnum:
+      title: Language
+      description: Programming language
+      type: string
+      enum:
+        - markup
+        - html
+        - xml
+        - svg
+        - css
+        - css
+        - clike
+        - javascript
+        - actionscript
+        - c
+        - cs
+        - cpp
+        - coffeescript
+        - dart
+        - ejs
+        - elm
+        - erb
+        - flow
+        - ftl
+        - handlebars
+        - java
+        - kotlin
+        - less
+        - livescript
+        - markdown
+        - objectivec
+        - php
+        - pug
+        - python
+        - r
+        - jsx
+        - tsx
+        - sass
+        - scss
+        - scala
+        - swift
+        - ts
+        - velocity
+        - yaml
     SourceEnum:
       title: Source
       type: string
@@ -6189,7 +6381,7 @@ components:
         - $ref: "#/components/schemas/TokenCreateAuthorizationCodeBody"
         - $ref: "#/components/schemas/TokenCreateRefreshTokenBody"
     TokenCreateAuthorizationCodeBody:
-      title: If `grant_type` is `authorization_code`
+      title: Authorization code flow
       type: object
       required:
         - grant_type
@@ -6228,7 +6420,7 @@ components:
           description: A cryptographically random string that is used to correlate the
             authorization request to the token request
     TokenCreateRefreshTokenBody:
-      title: If `grant_type` is `refresh_token`
+      title: Refresh token flow
       type: object
       required:
         - grant_type
@@ -6425,6 +6617,7 @@ components:
           type: string
           description: Content of the first comment of the note
         position:
+          title: position
           $ref: "#/components/schemas/ScreenNotePosition"
         color:
           $ref: "#/components/schemas/ScreenNoteColorNameEnum"
@@ -6437,10 +6630,13 @@ components:
       type: object
       properties:
         status:
+          title: status
           $ref: "#/components/schemas/ScreenNoteStatusEnum"
         position:
+          title: position
           $ref: "#/components/schemas/ScreenNotePosition"
         color:
+          title: color
           $ref: "#/components/schemas/ScreenNoteColorNameEnum"
     SpacingTokenUpdateBody:
       title: Spacing Token Update Body
@@ -6466,6 +6662,7 @@ components:
           type: string
           description: The secret to be used to generate signatures for webhook requests
         status:
+          title: status
           allOf:
             - $ref: "#/components/schemas/WebhookStatusEnum"
             - default: active
@@ -6508,6 +6705,7 @@ components:
           type: string
           description: The secret to be used to generate signatures for webhook requests
         status:
+          title: status
           $ref: "#/components/schemas/WebhookStatusEnum"
         project_ids:
           type: array
@@ -6542,6 +6740,7 @@ components:
           type: string
           description: The secret to be used to generate signatures for webhook requests
         status:
+          title: status
           allOf:
             - $ref: "#/components/schemas/WebhookStatusEnum"
             - default: active
@@ -6570,6 +6769,7 @@ components:
           type: string
           description: The secret to be used to generate signatures for webhook requests
         status:
+          title: status
           $ref: "#/components/schemas/WebhookStatusEnum"
         events:
           type: array
@@ -6592,6 +6792,7 @@ components:
           type: string
           description: The secret to be used to generate signatures for webhook requests
         status:
+          title: status
           allOf:
             - $ref: "#/components/schemas/WebhookStatusEnum"
             - default: active
@@ -6620,6 +6821,7 @@ components:
           type: string
           description: The secret to be used to generate signatures for webhook requests
         status:
+          title: status
           $ref: "#/components/schemas/WebhookStatusEnum"
         events:
           type: array
@@ -6642,6 +6844,7 @@ components:
           type: string
           description: The secret to be used to generate signatures for webhook requests
         status:
+          title: status
           allOf:
             - $ref: "#/components/schemas/WebhookStatusEnum"
             - default: active
@@ -6684,6 +6887,7 @@ components:
           type: string
           description: The secret to be used to generate signatures for webhook requests
         status:
+          title: status
           $ref: "#/components/schemas/WebhookStatusEnum"
         project_ids:
           type: array
@@ -6757,6 +6961,7 @@ components:
           type: string
           description: Name of the text style
         color:
+          title: color
           $ref: "#/components/schemas/ColorData"
     WebhookEvent:
       title: Webhook Event
@@ -9907,6 +10112,11 @@ components:
         height: 40
         absolute:
           $ref: "#/components/examples/layerPosition/value"
+    code:
+      summary: Code
+      value:
+        snippet: <div>Hello World</div>
+        language: html
     color:
       summary: Color
       value:
@@ -9919,12 +10129,7 @@ components:
         b: 5
         a: 1
         source:
-          project:
-            id: 5db81e73e1e36ee19f138c1a
-            name: HAL 9000
-            platform: web
-            linked_styleguide:
-              id: 5db981be9df2b3e1bfa19ef2
+          $ref: "#/components/examples/resourceSourceForProject/value"
     colorData:
       summary: Color Data
       value:
@@ -10002,6 +10207,8 @@ components:
         updated: 1572347818
         section:
           $ref: "#/components/examples/componentSectionReference/value"
+        source:
+          $ref: "#/components/examples/resourceSourceForProject/value"
         variant_properties:
           - $ref: "#/components/examples/componentVariantProperty/value"
     componentGroup:
@@ -10087,6 +10294,29 @@ components:
           $ref: "#/components/examples/colorData/value"
         links:
           - $ref: "#/components/examples/link/value"
+    connectedComponent:
+      summary: Connected Component
+      value:
+        components:
+          - $ref: "#/components/examples/entityReference/value"
+        name: Button
+        description: Generic button for HAL 9000
+        code:
+          $ref: "#/components/examples/code/value"
+        links:
+          - $ref: "#/components/examples/connectedComponentLink/value"
+          - $ref: "#/components/examples/connectedComponentCustomLink/value"
+    connectedComponentCustomLink:
+      summary: Connected Component Custom Link
+      value:
+        type: custom
+        name: Confluence
+        url: https://example.atlassian.net/wiki/spaces/DS/pages
+    connectedComponentLink:
+      summary: Connected Component Link
+      value:
+        type: github
+        url: https://github.com/octocat/Hello-World/blob/master/README
     designTokenFont:
       summary: Design Token Font
       value:
@@ -10369,6 +10599,7 @@ components:
         number_of_members: 47
         number_of_screens: 112
         number_of_components: 46
+        number_of_connected_components: 32
         number_of_text_styles: 28
         number_of_colors: 17
         number_of_spacing_tokens: 63
@@ -10389,6 +10620,7 @@ components:
           $ref: "#/components/examples/organizationSummary/value"
         number_of_members: 13
         number_of_components: 241
+        number_of_connected_components: 195
         number_of_text_styles: 48
         number_of_colors: 37
         number_of_spacing_tokens: 21
@@ -10415,6 +10647,7 @@ components:
         number_of_members: 47
         number_of_screens: 112
         number_of_components: 46
+        number_of_connected_components: 32
         number_of_text_styles: 28
         number_of_colors: 17
         linked_styleguide:
@@ -10721,12 +10954,7 @@ components:
         section:
           id: 5db81e6e6a4462065f04d932
         source:
-          project:
-            id: 5db81e73e1e36ee19f138c1a
-            name: HAL 9000
-            platform: web
-            linked_styleguide:
-              id: 5db981be9df2b3e1bfa19ef2
+          $ref: "#/components/examples/resourceSourceForProject/value"
     spacingTokenColor:
       summary: Spacing Token Color
       value:
@@ -10747,6 +10975,7 @@ components:
         updated: 1572347818
         number_of_members: 13
         number_of_components: 241
+        number_of_connected_components: 195
         number_of_text_styles: 48
         number_of_colors: 37
         parent:
@@ -10877,12 +11106,7 @@ components:
         color:
           $ref: "#/components/examples/colorData/value"
         source:
-          project:
-            id: 5db81e73e1e36ee19f138c1a
-            name: HAL 9000
-            platform: web
-            linked_styleguide:
-              id: 5db981be9df2b3e1bfa19ef2
+          $ref: "#/components/examples/resourceSourceForProject/value"
     textStyleData:
       summary: Layer Text Style
       value:
@@ -11427,7 +11651,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            User cannot create a project color:
               value:
                 message: User with role member in a project cannot create a color
     cannotCreateAScreen:
@@ -11437,7 +11661,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            User cannot create a screen:
               value:
                 message: Only editors (or higher) can create a screen in a project
     cannotCreateAScreenVersion:
@@ -11447,7 +11671,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            User cannot create a screen version:
               value:
                 message: Only editors (or higher) can create a screen version in a project
     cannotCreateAStyleguideColor:
@@ -11457,7 +11681,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            User cannot create a styleguide color:
               value:
                 message: User with role alien in a styleguide cannot create a color
     cannotCreateOrganizationWebhook:
@@ -11481,7 +11705,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            User cannot create webhook:
               value:
                 message: This zeplin app cannot create webhook. User needs to re-authorize the
                   app to create webhook
@@ -11537,7 +11761,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            User cannot delete webhook:
               value:
                 message: User cannot delete webhooks created by Zeplin apps
     cannotGetVersionInProject:
@@ -11547,7 +11771,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            Cannot get version in project:
               value:
                 message: User with role alien in a project cannot get version
     cannotGetWebhook:
@@ -11557,17 +11781,17 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            User cannot get webhook:
               value:
                 message: Only organization admins (or higher) can create an organization webhook
     cannotUpdateAProjectColor:
-      description: User cannot update a project olor
+      description: User cannot update a project color
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            User cannot update a project color:
               value:
                 message: User with role alien in a project cannot update a color
     cannotUpdateAProjectTextStyle:
@@ -11577,7 +11801,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            User cannot update a project text style:
               value:
                 message: User with role alien in a project cannot update a text style
     cannotUpdateAStyleguideColor:
@@ -11587,7 +11811,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            User cannot update a styleguide color:
               value:
                 message: User with role alien in a styleguide cannot update a color
     cannotUpdateAStyleguideTextStyle:
@@ -11597,7 +11821,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            User cannot update a styleguide text style:
               value:
                 message: User with role alien in a styleguide cannot update a text style
     cannotUpdateOrganizationWebhook:
@@ -11620,7 +11844,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            User cannot update the project:
               value:
                 message: User with role alien in a project cannot update the project
     cannotUpdateProjectComponent:
@@ -11630,7 +11854,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            User cannot update the project component:
               value:
                 message: User with role alien in a project cannot update the component
     cannotUpdateProjectWebhook:
@@ -11656,7 +11880,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            User cannot update the screen:
               value:
                 message: User with role alien in a project cannot update the screen
     cannotUpdateStyleguide:
@@ -11666,7 +11890,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            User cannot update the styleguide:
               value:
                 message: User with role alien in a styleguide cannot update the styleguide
     cannotUpdateStyleguideComponent:
@@ -11676,7 +11900,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            User cannot update the styleguide component:
               value:
                 message: User with role alien in a styleguide cannot update the component
     cannotUpdateStyleguideWebhook:
@@ -11702,7 +11926,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            User cannot update webhook:
               value:
                 message: User cannot update webhooks created by Zeplin apps
     forbiddenCreateProjectWebhook:
@@ -11808,7 +12032,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            Notification not found response:
               value:
                 message: Notification not found
     organizationNotFound:
@@ -11818,7 +12042,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            Organization not found response:
               value:
                 message: Organization not found
     organizationOrMemberNotFound:
@@ -11854,7 +12078,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            Project archived response:
               value:
                 message: Project is archived
     projectComponentOrComponentVersionNotFound:
@@ -11880,7 +12104,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            Project not found response:
               value:
                 message: Project not found
     projectOrColorNotFound:
@@ -12032,7 +12256,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            Styleguide archived response:
               value:
                 message: Styleguide is archived
     styleguideComponentOrComponentVersionNotFound:
@@ -12058,7 +12282,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            Styleguide not found response:
               value:
                 message: Styleguide not found
     styleguideOrColorNotFound:
@@ -12306,7 +12530,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            Webhook not found response:
               value:
                 message: Webhook not found
     cannotUpdateAProjectSpacingToken:
@@ -12316,7 +12540,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            User cannot update a project spacing token:
               value:
                 message: User with role alien in a project cannot update a spacing token
     cannotUpdateAStyleguideSpacingToken:
@@ -12326,7 +12550,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            response:
+            User cannot update a styleguide spacing token:
               value:
                 message: User with role alien in a styleguide cannot update a spacing token
     projectOrSpacingTokenNotFound:

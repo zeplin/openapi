@@ -3,7 +3,7 @@
   "info": {
     "title": "Zeplin API",
     "description": "Access your resources in Zeplin",
-    "version": "1.7.1",
+    "version": "1.8.0",
     "contact": {
       "name": "Zeplin",
       "url": "https://zeplin.io",
@@ -257,7 +257,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Organization Summary": {
                     "value": [
                       {
                         "$ref": "#/components/examples/organizationSummary/value"
@@ -343,7 +343,7 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
-                  "response": {
+                  "Only organization admins (or higher) can access billing details response": {
                     "value": {
                       "message": "Only organization admins (or higher) can access billing details"
                     }
@@ -389,7 +389,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Organization Projects": {
                     "value": [
                       {
                         "$ref": "#/components/examples/organizationProject/value"
@@ -431,7 +431,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Organization Workflow Statuses": {
                     "value": [
                       {
                         "$ref": "#/components/examples/workflowStatus/value"
@@ -479,7 +479,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Organization Styleguides": {
                     "value": [
                       {
                         "$ref": "#/components/examples/organizationStyleguide/value"
@@ -521,7 +521,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Successful response": {
                     "value": [
                       {
                         "$ref": "#/components/examples/user/value"
@@ -540,7 +540,7 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
-                  "response": {
+                  "User is restricted response": {
                     "value": {
                       "message": "User is restricted"
                     }
@@ -592,7 +592,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Organization Webhooks": {
                     "value": [
                       {
                         "$ref": "#/components/examples/webhook/value"
@@ -800,7 +800,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Organization Members": {
                     "value": [
                       {
                         "$ref": "#/components/examples/organizationMember/value"
@@ -884,7 +884,7 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
-                  "response": {
+                  "Admin cannot be restricted response": {
                     "value": {
                       "message": "Organization admin cannot be restricted"
                     }
@@ -970,7 +970,7 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
-                  "response": {
+                  "Organization resource is locked response": {
                     "value": {
                       "message": "Organization resource is locked. Please try again later."
                     }
@@ -1025,7 +1025,7 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
-                  "response": {
+                  "Admin cannot be restricted response": {
                     "value": {
                       "message": "Organization admin cannot be restricted"
                     }
@@ -1111,7 +1111,7 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
-                  "response": {
+                  "Organization resource is locked response": {
                     "value": {
                       "message": "Organization resource is locked. Please try again later."
                     }
@@ -1201,7 +1201,7 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
-                  "response": {
+                  "Organization resource is locked response": {
                     "value": {
                       "message": "Organization resource is locked. Please try again later."
                     }
@@ -1247,7 +1247,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Projects": {
                     "value": [
                       {
                         "$ref": "#/components/examples/project/value"
@@ -1269,7 +1269,7 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
-                  "response": {
+                  "User is restricted response": {
                     "value": {
                       "message": "User is restricted"
                     }
@@ -1318,7 +1318,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Organization Styleguides": {
                     "value": [
                       {
                         "$ref": "#/components/examples/styleguide/value"
@@ -1337,7 +1337,7 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
-                  "response": {
+                  "User is restricted response": {
                     "value": {
                       "message": "User is restricted"
                     }
@@ -1386,7 +1386,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Projects": {
                     "value": [
                       {
                         "$ref": "#/components/examples/project/value"
@@ -1509,7 +1509,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Project Members": {
                     "value": [
                       {
                         "$ref": "#/components/examples/projectMember/value"
@@ -1562,7 +1562,7 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
-                  "response": {
+                  "User limit is reached": {
                     "value": "Looks like you reached the member limit for your project, contact us to learn more: support@zeplin.io"
                   }
                 }
@@ -1577,7 +1577,7 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
-                  "response": {
+                  "Organization member not allowed": {
                     "value": "Only organization admins (or higher) can add new members"
                   }
                 }
@@ -1622,7 +1622,7 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
-                  "response": {
+                  "Project resource is locked response": {
                     "value": {
                       "message": "Project resource is locked. Please try again later."
                     }
@@ -1662,7 +1662,7 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
-                  "response": {
+                  "Organization member not allowed": {
                     "value": "Only organization admins (or higher) can add remove members"
                   }
                 }
@@ -1721,7 +1721,7 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
-                  "response": {
+                  "Project resource is locked response": {
                     "value": {
                       "message": "Project resource is locked. Please try again later."
                     }
@@ -1770,7 +1770,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Screens": {
                     "value": [
                       {
                         "$ref": "#/components/examples/screen/value"
@@ -2014,7 +2014,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Screen Notes": {
                     "value": [
                       {
                         "$ref": "#/components/examples/screenNote/value"
@@ -2294,7 +2294,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Screen Versions": {
                     "value": [
                       {
                         "$ref": "#/components/examples/screenVersionSummary/value"
@@ -2488,7 +2488,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Screen Sections": {
                     "value": [
                       {
                         "$ref": "#/components/examples/screenSection/value"
@@ -2574,7 +2574,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Screen Variants": {
                     "value": [
                       {
                         "$ref": "#/components/examples/screenVariantGroup/value"
@@ -2669,7 +2669,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Project Colors": {
                     "value": [
                       {
                         "$ref": "#/components/examples/color/value"
@@ -2814,7 +2814,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Project Text Styles": {
                     "value": [
                       {
                         "$ref": "#/components/examples/textStyle/value"
@@ -2876,6 +2876,60 @@
         }
       }
     },
+    "/v1/projects/{project_id}/connected_components": {
+      "get": {
+        "tags": [
+          "Connected Components"
+        ],
+        "summary": "Get project connected components",
+        "description": "List all connected components of a project",
+        "operationId": "GetProjectConnectedComponents",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/include_linked_styleguides"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConnectedComponent"
+                  }
+                },
+                "examples": {
+                  "Connected Components": {
+                    "value": [
+                      {
+                        "$ref": "#/components/examples/connectedComponent/value"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/projectNotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/projectArchived"
+          }
+        }
+      }
+    },
     "/v1/projects/{project_id}/components": {
       "get": {
         "tags": [
@@ -2898,6 +2952,9 @@
             "$ref": "#/components/parameters/include_latest_version"
           },
           {
+            "$ref": "#/components/parameters/include_linked_styleguides"
+          },
+          {
             "$ref": "#/components/parameters/limit"
           },
           {
@@ -2916,7 +2973,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Project Components": {
                     "value": [
                       {
                         "$ref": "#/components/examples/component/value"
@@ -3095,7 +3152,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Project Component Sections": {
                     "value": [
                       {
                         "$ref": "#/components/examples/componentSection/value"
@@ -3296,7 +3353,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Project Webhooks": {
                     "value": [
                       {
                         "$ref": "#/components/examples/projectWebhook/value"
@@ -3567,7 +3624,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Styleguides": {
                     "value": [
                       {
                         "$ref": "#/components/examples/styleguide/value"
@@ -3705,7 +3762,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Styleguide Colors": {
                     "value": [
                       {
                         "$ref": "#/components/examples/color/value"
@@ -3856,7 +3913,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Styleguide Text Styles": {
                     "value": [
                       {
                         "$ref": "#/components/examples/textStyle/value"
@@ -3955,7 +4012,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Styleguide Members": {
                     "value": [
                       {
                         "$ref": "#/components/examples/styleguideMember/value"
@@ -4008,7 +4065,7 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
-                  "response": {
+                  "User limit is reached": {
                     "value": "Looks like you reached the member limit for your styleguide, contact us to learn more: support@zeplin.io"
                   }
                 }
@@ -4023,7 +4080,7 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
-                  "response": {
+                  "Organization member not allowed": {
                     "value": "Only organization admins (or higher) can add new members"
                   }
                 }
@@ -4068,7 +4125,7 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
-                  "response": {
+                  "Styleguiide resource is locked response": {
                     "value": {
                       "message": "Styleguide resource is locked. Please try again later."
                     }
@@ -4108,7 +4165,7 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
-                  "response": {
+                  "Organization member not allowed": {
                     "value": "Only organization admins (or higher) can add remove members"
                   }
                 }
@@ -4167,7 +4224,7 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
-                  "response": {
+                  "Styleguide resource is locked response": {
                     "value": {
                       "message": "Styleguide resource is locked. Please try again later."
                     }
@@ -4210,7 +4267,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Projects": {
                     "value": [
                       {
                         "$ref": "#/components/examples/project/value"
@@ -4226,6 +4283,66 @@
           },
           "422": {
             "$ref": "#/components/responses/styleguideArchived"
+          }
+        }
+      }
+    },
+    "/v1/styleguides/{styleguide_id}/connected_components": {
+      "get": {
+        "tags": [
+          "Connected Components"
+        ],
+        "summary": "Get styleguide connected components",
+        "description": "List all connected components of a project",
+        "operationId": "GetStyleguideConnectedComponents",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/styleguide_id"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/linked_project"
+          },
+          {
+            "$ref": "#/components/parameters/linked_styleguide"
+          },
+          {
+            "$ref": "#/components/parameters/include_linked_styleguides"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConnectedComponent"
+                  }
+                },
+                "examples": {
+                  "Connected Components": {
+                    "value": [
+                      {
+                        "$ref": "#/components/examples/connectedComponent/value"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/projectNotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/projectArchived"
           }
         }
       }
@@ -4255,6 +4372,9 @@
             "$ref": "#/components/parameters/linked_styleguide"
           },
           {
+            "$ref": "#/components/parameters/include_linked_styleguides"
+          },
+          {
             "$ref": "#/components/parameters/include_latest_version"
           },
           {
@@ -4276,7 +4396,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Styleguide Components": {
                     "value": [
                       {
                         "$ref": "#/components/examples/component/value"
@@ -4682,7 +4802,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Styleguide Webhooks": {
                     "value": [
                       {
                         "$ref": "#/components/examples/styleguideWebhook/value"
@@ -4971,7 +5091,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Personal Projects": {
                     "value": [
                       {
                         "$ref": "#/components/examples/project/value"
@@ -5016,7 +5136,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Personal Styleguides": {
                     "value": [
                       {
                         "$ref": "#/components/examples/styleguide/value"
@@ -5064,7 +5184,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "User Webhooks": {
                     "value": [
                       {
                         "$ref": "#/components/examples/webhook/value"
@@ -5249,7 +5369,7 @@
                   }
                 },
                 "examples": {
-                  "response": {
+                  "Notifications": {
                     "value": [
                       {
                         "$ref": "#/components/examples/notification/value"
@@ -5690,6 +5810,7 @@
           "number_of_members",
           "number_of_screens",
           "number_of_components",
+          "number_of_connected_components",
           "number_of_colors",
           "number_of_text_styles",
           "number_of_spacing_tokens"
@@ -5759,6 +5880,10 @@
           "number_of_components": {
             "type": "integer",
             "description": "The number of components exported to the project"
+          },
+          "number_of_connected_components": {
+            "type": "integer",
+            "description": "The number of connected components in the project"
           },
           "number_of_text_styles": {
             "type": "integer",
@@ -6402,7 +6527,8 @@
           "number_of_components",
           "number_of_colors",
           "number_of_text_styles",
-          "number_of_spacing_tokens"
+          "number_of_spacing_tokens",
+          "number_of_connected_components"
         ],
         "properties": {
           "id": {
@@ -6454,6 +6580,10 @@
           "number_of_members": {
             "type": "integer",
             "description": "The number of members of the styleguide"
+          },
+          "number_of_connected_components": {
+            "type": "integer",
+            "description": "The number of connected components in the styleguide"
           },
           "number_of_components": {
             "type": "integer",
@@ -6745,6 +6875,10 @@
               "$ref": "#/components/schemas/ComponentVariantProperty"
             },
             "description": "Variant properties of the component"
+          },
+          "source": {
+            "$ref": "#/components/schemas/ResourceSource",
+            "description": "Source of the text style. Either `project` or `styleguide`."
           },
           "latest_version": {
             "$ref": "#/components/schemas/ComponentVersion",
@@ -8399,7 +8533,7 @@
           }
         },
         "example": {
-          "$ref": "#/components/examples/grid"
+          "$ref": "#/components/examples/horizontalGrid"
         }
       },
       "ColorDesignToken": {
@@ -8888,6 +9022,157 @@
           "$ref": "#/components/examples/resourceStyleguideSource"
         }
       },
+      "ConnectedComponent": {
+        "title": "Connected Component",
+        "type": "object",
+        "required": [
+          "components",
+          "links"
+        ],
+        "properties": {
+          "compontents": {
+            "description": "Components that are connected",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityReference"
+            }
+          },
+          "file_path": {
+            "type": "string",
+            "description": "File path of the connected component from the source code"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the connected component"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the connected component"
+          },
+          "code": {
+            "$ref": "#/components/schemas/Code"
+          },
+          "links": {
+            "type": "array",
+            "description": "Links of the connected component",
+            "items": {
+              "$ref": "#/components/schemas/ConnectedComponentLink"
+            }
+          },
+          "source": {
+            "$ref": "#/components/schemas/ResourceSource"
+          }
+        },
+        "example": {
+          "$ref": "#/components/examples/connectedComponent"
+        }
+      },
+      "ConnectedComponentLink": {
+        "title": "Connected Component Link",
+        "type": "object",
+        "required": [
+          "type",
+          "url"
+        ],
+        "properties": {
+          "type": {
+            "description": "Type of the link",
+            "enum": [
+              "custom",
+              "github",
+              "gitlab",
+              "bitbucket",
+              "storybook",
+              "styleguidist"
+            ]
+          },
+          "url": {
+            "type": "string",
+            "description": "Url of the link"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name for custom links"
+          }
+        },
+        "example": {
+          "$ref": "#/components/examples/connectedComponentLink"
+        },
+        "x-examples": {
+          "Link": {
+            "$ref": "#/components/examples/connectedComponentLink"
+          },
+          "Custom Link": {
+            "$ref": "#/components/examples/connectedComponentCustomLink"
+          }
+        }
+      },
+      "Code": {
+        "title": "Code",
+        "type": "object",
+        "required": [
+          "snippet"
+        ],
+        "properties": {
+          "snippet": {
+            "type": "string",
+            "description": "The code snippet"
+          },
+          "language": {
+            "type": "string",
+            "description": "Language of the code snippet"
+          }
+        },
+        "example": {
+          "$ref": "#/components/examples/code"
+        }
+      },
+      "LanguageEnum": {
+        "title": "Language",
+        "description": "Programming language",
+        "type": "string",
+        "enum": [
+          "markup",
+          "html",
+          "xml",
+          "svg",
+          "css",
+          "css",
+          "clike",
+          "javascript",
+          "actionscript",
+          "c",
+          "cs",
+          "cpp",
+          "coffeescript",
+          "dart",
+          "ejs",
+          "elm",
+          "erb",
+          "flow",
+          "ftl",
+          "handlebars",
+          "java",
+          "kotlin",
+          "less",
+          "livescript",
+          "markdown",
+          "objectivec",
+          "php",
+          "pug",
+          "python",
+          "r",
+          "jsx",
+          "tsx",
+          "sass",
+          "scss",
+          "scala",
+          "swift",
+          "ts",
+          "velocity",
+          "yaml"
+        ]
+      },
       "SourceEnum": {
         "title": "Source",
         "type": "string",
@@ -9253,7 +9538,7 @@
         ]
       },
       "TokenCreateAuthorizationCodeBody": {
-        "title": "If `grant_type` is `authorization_code`",
+        "title": "Authorization code flow",
         "type": "object",
         "required": [
           "grant_type",
@@ -9291,7 +9576,7 @@
         }
       },
       "TokenCreateRefreshTokenBody": {
-        "title": "If `grant_type` is `refresh_token`",
+        "title": "Refresh token flow",
         "type": "object",
         "required": [
           "grant_type",
@@ -9509,6 +9794,7 @@
             "description": "Content of the first comment of the note"
           },
           "position": {
+            "title": "position",
             "$ref": "#/components/schemas/ScreenNotePosition"
           },
           "color": {
@@ -9526,12 +9812,15 @@
         "type": "object",
         "properties": {
           "status": {
+            "title": "status",
             "$ref": "#/components/schemas/ScreenNoteStatusEnum"
           },
           "position": {
+            "title": "position",
             "$ref": "#/components/schemas/ScreenNotePosition"
           },
           "color": {
+            "title": "color",
             "$ref": "#/components/schemas/ScreenNoteColorNameEnum"
           }
         }
@@ -9567,6 +9856,7 @@
             "description": "The secret to be used to generate signatures for webhook requests"
           },
           "status": {
+            "title": "status",
             "allOf": [
               {
                 "$ref": "#/components/schemas/WebhookStatusEnum"
@@ -9627,6 +9917,7 @@
             "description": "The secret to be used to generate signatures for webhook requests"
           },
           "status": {
+            "title": "status",
             "$ref": "#/components/schemas/WebhookStatusEnum"
           },
           "project_ids": {
@@ -9673,6 +9964,7 @@
             "description": "The secret to be used to generate signatures for webhook requests"
           },
           "status": {
+            "title": "status",
             "allOf": [
               {
                 "$ref": "#/components/schemas/WebhookStatusEnum"
@@ -9715,6 +10007,7 @@
             "description": "The secret to be used to generate signatures for webhook requests"
           },
           "status": {
+            "title": "status",
             "$ref": "#/components/schemas/WebhookStatusEnum"
           },
           "events": {
@@ -9745,6 +10038,7 @@
             "description": "The secret to be used to generate signatures for webhook requests"
           },
           "status": {
+            "title": "status",
             "allOf": [
               {
                 "$ref": "#/components/schemas/WebhookStatusEnum"
@@ -9787,6 +10081,7 @@
             "description": "The secret to be used to generate signatures for webhook requests"
           },
           "status": {
+            "title": "status",
             "$ref": "#/components/schemas/WebhookStatusEnum"
           },
           "events": {
@@ -9817,6 +10112,7 @@
             "description": "The secret to be used to generate signatures for webhook requests"
           },
           "status": {
+            "title": "status",
             "allOf": [
               {
                 "$ref": "#/components/schemas/WebhookStatusEnum"
@@ -9877,6 +10173,7 @@
             "description": "The secret to be used to generate signatures for webhook requests"
           },
           "status": {
+            "title": "status",
             "$ref": "#/components/schemas/WebhookStatusEnum"
           },
           "project_ids": {
@@ -9978,6 +10275,7 @@
             "description": "Name of the text style"
           },
           "color": {
+            "title": "color",
             "$ref": "#/components/schemas/ColorData"
           }
         }
@@ -14517,6 +14815,13 @@
           }
         }
       },
+      "code": {
+        "summary": "Code",
+        "value": {
+          "snippet": "<div>Hello World</div>",
+          "language": "html"
+        }
+      },
       "color": {
         "summary": "Color",
         "value": {
@@ -14529,14 +14834,7 @@
           "b": 5,
           "a": 1,
           "source": {
-            "project": {
-              "id": "5db81e73e1e36ee19f138c1a",
-              "name": "HAL 9000",
-              "platform": "web",
-              "linked_styleguide": {
-                "id": "5db981be9df2b3e1bfa19ef2"
-              }
-            }
+            "$ref": "#/components/examples/resourceSourceForProject/value"
           }
         }
       },
@@ -14647,6 +14945,9 @@
           "updated": 1572347818,
           "section": {
             "$ref": "#/components/examples/componentSectionReference/value"
+          },
+          "source": {
+            "$ref": "#/components/examples/resourceSourceForProject/value"
           },
           "variant_properties": [
             {
@@ -14779,6 +15080,44 @@
               "$ref": "#/components/examples/link/value"
             }
           ]
+        }
+      },
+      "connectedComponent": {
+        "summary": "Connected Component",
+        "value": {
+          "components": [
+            {
+              "$ref": "#/components/examples/entityReference/value"
+            }
+          ],
+          "name": "Button",
+          "description": "Generic button for HAL 9000",
+          "code": {
+            "$ref": "#/components/examples/code/value"
+          },
+          "links": [
+            {
+              "$ref": "#/components/examples/connectedComponentLink/value"
+            },
+            {
+              "$ref": "#/components/examples/connectedComponentCustomLink/value"
+            }
+          ]
+        }
+      },
+      "connectedComponentCustomLink": {
+        "summary": "Connected Component Custom Link",
+        "value": {
+          "type": "custom",
+          "name": "Confluence",
+          "url": "https://example.atlassian.net/wiki/spaces/DS/pages"
+        }
+      },
+      "connectedComponentLink": {
+        "summary": "Connected Component Link",
+        "value": {
+          "type": "github",
+          "url": "https://github.com/octocat/Hello-World/blob/master/README"
         }
       },
       "designTokenFont": {
@@ -15176,6 +15515,7 @@
           "number_of_members": 47,
           "number_of_screens": 112,
           "number_of_components": 46,
+          "number_of_connected_components": 32,
           "number_of_text_styles": 28,
           "number_of_colors": 17,
           "number_of_spacing_tokens": 63,
@@ -15200,6 +15540,7 @@
           },
           "number_of_members": 13,
           "number_of_components": 241,
+          "number_of_connected_components": 195,
           "number_of_text_styles": 48,
           "number_of_colors": 37,
           "number_of_spacing_tokens": 21,
@@ -15231,6 +15572,7 @@
           "number_of_members": 47,
           "number_of_screens": 112,
           "number_of_components": 46,
+          "number_of_connected_components": 32,
           "number_of_text_styles": 28,
           "number_of_colors": 17,
           "linked_styleguide": {
@@ -15672,14 +16014,7 @@
             "id": "5db81e6e6a4462065f04d932"
           },
           "source": {
-            "project": {
-              "id": "5db81e73e1e36ee19f138c1a",
-              "name": "HAL 9000",
-              "platform": "web",
-              "linked_styleguide": {
-                "id": "5db981be9df2b3e1bfa19ef2"
-              }
-            }
+            "$ref": "#/components/examples/resourceSourceForProject/value"
           }
         }
       },
@@ -15705,6 +16040,7 @@
           "updated": 1572347818,
           "number_of_members": 13,
           "number_of_components": 241,
+          "number_of_connected_components": 195,
           "number_of_text_styles": 48,
           "number_of_colors": 37,
           "parent": {
@@ -15885,14 +16221,7 @@
             "$ref": "#/components/examples/colorData/value"
           },
           "source": {
-            "project": {
-              "id": "5db81e73e1e36ee19f138c1a",
-              "name": "HAL 9000",
-              "platform": "web",
-              "linked_styleguide": {
-                "id": "5db981be9df2b3e1bfa19ef2"
-              }
-            }
+            "$ref": "#/components/examples/resourceSourceForProject/value"
           }
         }
       },
@@ -16584,7 +16913,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "User cannot create a project color": {
                 "value": {
                   "message": "User with role member in a project cannot create a color"
                 }
@@ -16601,7 +16930,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "User cannot create a screen": {
                 "value": {
                   "message": "Only editors (or higher) can create a screen in a project"
                 }
@@ -16618,7 +16947,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "User cannot create a screen version": {
                 "value": {
                   "message": "Only editors (or higher) can create a screen version in a project"
                 }
@@ -16635,7 +16964,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "User cannot create a styleguide color": {
                 "value": {
                   "message": "User with role alien in a styleguide cannot create a color"
                 }
@@ -16674,7 +17003,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "User cannot create webhook": {
                 "value": {
                   "message": "This zeplin app cannot create webhook. User needs to re-authorize the app to create webhook"
                 }
@@ -16767,7 +17096,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "User cannot delete webhook": {
                 "value": {
                   "message": "User cannot delete webhooks created by Zeplin apps"
                 }
@@ -16784,7 +17113,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "Cannot get version in project": {
                 "value": {
                   "message": "User with role alien in a project cannot get version"
                 }
@@ -16801,7 +17130,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "User cannot get webhook": {
                 "value": {
                   "message": "Only organization admins (or higher) can create an organization webhook"
                 }
@@ -16811,14 +17140,14 @@
         }
       },
       "cannotUpdateAProjectColor": {
-        "description": "User cannot update a project olor",
+        "description": "User cannot update a project color",
         "content": {
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "User cannot update a project color": {
                 "value": {
                   "message": "User with role alien in a project cannot update a color"
                 }
@@ -16835,7 +17164,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "User cannot update a project text style": {
                 "value": {
                   "message": "User with role alien in a project cannot update a text style"
                 }
@@ -16852,7 +17181,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "User cannot update a styleguide color": {
                 "value": {
                   "message": "User with role alien in a styleguide cannot update a color"
                 }
@@ -16869,7 +17198,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "User cannot update a styleguide text style": {
                 "value": {
                   "message": "User with role alien in a styleguide cannot update a text style"
                 }
@@ -16908,7 +17237,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "User cannot update the project": {
                 "value": {
                   "message": "User with role alien in a project cannot update the project"
                 }
@@ -16925,7 +17254,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "User cannot update the project component": {
                 "value": {
                   "message": "User with role alien in a project cannot update the component"
                 }
@@ -16969,7 +17298,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "User cannot update the screen": {
                 "value": {
                   "message": "User with role alien in a project cannot update the screen"
                 }
@@ -16986,7 +17315,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "User cannot update the styleguide": {
                 "value": {
                   "message": "User with role alien in a styleguide cannot update the styleguide"
                 }
@@ -17003,7 +17332,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "User cannot update the styleguide component": {
                 "value": {
                   "message": "User with role alien in a styleguide cannot update the component"
                 }
@@ -17047,7 +17376,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "User cannot update webhook": {
                 "value": {
                   "message": "User cannot update webhooks created by Zeplin apps"
                 }
@@ -17219,7 +17548,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "Notification not found response": {
                 "value": {
                   "message": "Notification not found"
                 }
@@ -17236,7 +17565,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "Organization not found response": {
                 "value": {
                   "message": "Organization not found"
                 }
@@ -17297,7 +17626,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "Project archived response": {
                 "value": {
                   "message": "Project is archived"
                 }
@@ -17341,7 +17670,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "Project not found response": {
                 "value": {
                   "message": "Project not found"
                 }
@@ -17598,7 +17927,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "Styleguide archived response": {
                 "value": {
                   "message": "Styleguide is archived"
                 }
@@ -17642,7 +17971,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "Styleguide not found response": {
                 "value": {
                   "message": "Styleguide not found"
                 }
@@ -18037,7 +18366,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "Webhook not found response": {
                 "value": {
                   "message": "Webhook not found"
                 }
@@ -18054,7 +18383,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "User cannot update a project spacing token": {
                 "value": {
                   "message": "User with role alien in a project cannot update a spacing token"
                 }
@@ -18071,7 +18400,7 @@
               "$ref": "#/components/schemas/ErrorResponse"
             },
             "examples": {
-              "response": {
+              "User cannot update a styleguide spacing token": {
                 "value": {
                   "message": "User with role alien in a styleguide cannot update a spacing token"
                 }
