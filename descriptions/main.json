@@ -3,7 +3,7 @@
   "info": {
     "title": "Zeplin API",
     "description": "Access your resources in Zeplin",
-    "version": "1.8.1",
+    "version": "1.8.2",
     "contact": {
       "name": "Zeplin",
       "url": "https://zeplin.io",
@@ -9135,7 +9135,6 @@
           "html",
           "xml",
           "svg",
-          "css",
           "css",
           "clike",
           "javascript",
