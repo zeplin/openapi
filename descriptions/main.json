@@ -3,7 +3,7 @@
   "info": {
     "title": "Zeplin API",
     "description": "Access your resources in Zeplin",
-    "version": "1.8.3",
+    "version": "1.9.0",
     "contact": {
       "name": "Zeplin",
       "url": "https://zeplin.io",
@@ -3010,6 +3010,9 @@
           },
           {
             "$ref": "#/components/parameters/include_latest_version"
+          },
+          {
+            "$ref": "#/components/parameters/include_linked_styleguides"
           }
         ],
         "responses": {
@@ -3091,6 +3094,9 @@
           },
           {
             "$ref": "#/components/parameters/component_id"
+          },
+          {
+            "$ref": "#/components/parameters/include_linked_styleguides"
           }
         ],
         "responses": {
@@ -4439,6 +4445,9 @@
           },
           {
             "$ref": "#/components/parameters/include_latest_version"
+          },
+          {
+            "$ref": "#/components/parameters/include_linked_styleguides"
           }
         ],
         "responses": {
@@ -4526,6 +4535,9 @@
           },
           {
             "$ref": "#/components/parameters/linked_styleguide"
+          },
+          {
+            "$ref": "#/components/parameters/include_linked_styleguides"
           }
         ],
         "responses": {
