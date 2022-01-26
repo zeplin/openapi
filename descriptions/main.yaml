@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Zeplin API
   description: Access your resources in Zeplin
-  version: 1.9.0
+  version: 1.10.0
   contact:
     name: Zeplin
     url: https://zeplin.io
@@ -3006,6 +3006,194 @@ paths:
           $ref: "#/components/responses/styleguideNotFound"
         "422":
           $ref: "#/components/responses/styleguideArchived"
+  "/v1/projects/{project_id}/flow_boards":
+    get:
+      tags:
+        - Flows
+      summary: Get project flow boards
+      description: List all flow boards in a project.
+      operationId: GetProjectFlowBoards
+      parameters:
+        - $ref: "#/components/parameters/project_id"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FlowBoard"
+              examples:
+                Boards:
+                  value:
+                    - $ref: "#/components/examples/flowBoard/value"
+        "404":
+          $ref: "#/components/responses/projectNotFound"
+        "422":
+          $ref: "#/components/responses/projectArchived"
+  "/v1/projects/{project_id}/flow_boards/{flow_board_id}":
+    get:
+      tags:
+        - Flows
+      summary: Get a single project flow board
+      description: Get flow board details related to a project
+      operationId: GetProjectFlowBoard
+      parameters:
+        - $ref: "#/components/parameters/project_id"
+        - $ref: "#/components/parameters/flow_board_id"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FlowBoard"
+              examples:
+                Board:
+                  $ref: "#/components/examples/flowBoard"
+        "404":
+          $ref: "#/components/responses/projectOrFlowBoardNotFound"
+        "422":
+          $ref: "#/components/responses/projectArchived"
+  "/v1/projects/{project_id}/flow_boards/{flow_board_id}/groups":
+    get:
+      tags:
+        - Flows
+      summary: Get project flow board groups
+      description: List all flow board groups in a project.
+      operationId: GetProjectFlowBoardGroups
+      parameters:
+        - $ref: "#/components/parameters/project_id"
+        - $ref: "#/components/parameters/flow_board_id"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FlowBoardGroup"
+              examples:
+                Board Group:
+                  value:
+                    - $ref: "#/components/examples/flowBoardGroup/value"
+        "404":
+          $ref: "#/components/responses/projectOrFlowBoardNotFound"
+        "422":
+          $ref: "#/components/responses/projectArchived"
+  "/v1/projects/{project_id}/flow_boards/{flow_board_id}/connectors":
+    get:
+      tags:
+        - Flows
+      summary: Get project flow board connectors
+      description: List all connectors of the flow board in a project
+      operationId: GetProjectFlowBoardConnectors
+      parameters:
+        - $ref: "#/components/parameters/project_id"
+        - $ref: "#/components/parameters/flow_board_id"
+        - $ref: "#/components/parameters/starting_node_id"
+        - $ref: "#/components/parameters/ending_node_id"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FlowBoardConnector"
+              examples:
+                Board Connectors:
+                  value:
+                    - $ref: "#/components/examples/flowBoardConnector/value"
+        "404":
+          $ref: "#/components/responses/projectNotFound"
+        "422":
+          $ref: "#/components/responses/projectArchived"
+  "/v1/projects/{project_id}/flow_boards/{flow_board_id}/connectors/{connector_id}":
+    get:
+      tags:
+        - Flows
+      summary: Get a single project flow board connector
+      description: Get details of the project flow board connector
+      operationId: GetProjectFlowBoardConnector
+      parameters:
+        - $ref: "#/components/parameters/project_id"
+        - $ref: "#/components/parameters/flow_board_id"
+        - $ref: "#/components/parameters/connector_id"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FlowBoardConnector"
+              examples:
+                response:
+                  $ref: "#/components/examples/flowBoardConnector"
+        "404":
+          $ref: "#/components/responses/projectOrFlowBoardConnectorNotFound"
+        "422":
+          $ref: "#/components/responses/projectArchived"
+  "/v1/projects/{project_id}/flow_boards/{flow_board_id}/nodes":
+    get:
+      tags:
+        - Flows
+      summary: Get project flow board nodes
+      description: List all nodes of the flow board in a project
+      operationId: GetProjectFlowBoardNodes
+      parameters:
+        - $ref: "#/components/parameters/project_id"
+        - $ref: "#/components/parameters/flow_board_id"
+        - $ref: "#/components/parameters/group_id"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FlowBoardNode"
+              examples:
+                Board Nodes:
+                  value:
+                    - $ref: "#/components/examples/flowBoardNode/value"
+        "404":
+          $ref: "#/components/responses/projectNotFound"
+        "422":
+          $ref: "#/components/responses/projectArchived"
+  "/v1/projects/{project_id}/flow_boards/{flow_board_id}/nodes/{node_id}":
+    get:
+      tags:
+        - Flows
+      summary: Get a single project flow board node
+      description: Get details of the project flow board node
+      operationId: GetProjectFlowBoardNode
+      parameters:
+        - $ref: "#/components/parameters/project_id"
+        - $ref: "#/components/parameters/flow_board_id"
+        - $ref: "#/components/parameters/node_id"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FlowBoardNode"
+              examples:
+                response:
+                  $ref: "#/components/examples/flowBoardNode"
+        "404":
+          $ref: "#/components/responses/projectOrFlowBoardNodeNotFound"
+        "422":
+          $ref: "#/components/responses/projectArchived"
   /v1/users/me:
     get:
       tags:
@@ -5376,6 +5564,8 @@ components:
 
         `project.screen_section.jira_attachment`  | `added`<br>`removed` | `Project (extra: { name, platform })`<br>`ScreenSection (extra: { name })` | `JiraIntegration (extra: { issue })` |  Used for changes related to jira attachments in a screen section.
 
+        `project.flow_board`  | `added` | `Project (extra: { name, platform })` | `FlowBoard (extra: {})` |  Used for changes related to flow boards in a project.
+
         `styleguide.color`  | `created`<br>`updated`<br>`deleted` | `Styleguide (extra: { name, platform })` | `Color (extra: { name, r, g, b, a })` |  Used for changes related to colors in a styleguide.
 
         `styleguide.text_style`  | `created`<br>`updated`<br>`deleted` | `Styleguide (extra: { name, platform })` | `TextStyle (extra: { name })` |  Used for changes related to text styles in a styleguide.
@@ -6188,6 +6378,7 @@ components:
         - project.screen.version
         - project.spacing_token
         - project.text_style
+        - project.flow_board
     StyleguideWebhookEventEnum:
       title: Styleguide Webhook Event Type
       type: string
@@ -6278,6 +6469,7 @@ components:
         - styleguide.slack_integration
         - project.member
         - styleguide.member
+        - project.flow_board
     ColorUpdateBody:
       title: Color Update Body
       type: object
@@ -6965,6 +7157,249 @@ components:
         color:
           title: color
           $ref: "#/components/schemas/ColorData"
+    FlowBoard:
+      title: Flow Board
+      type: object
+      required:
+        - id
+        - name
+        - number_of_connectors
+        - number_of_nodes
+        - number_of_groups
+      properties:
+        id:
+          type: string
+          description: Identifier of the board
+        name:
+          type: string
+          description: Name of the board
+        number_of_connectors:
+          type: integer
+          description: Number of connectors in the board
+        number_of_nodes:
+          type: integer
+          description: Number of nodes in the board
+        number_of_groups:
+          type: integer
+          description: Number of groups in the board
+      example:
+        $ref: "#/components/examples/flowBoard"
+    FlowBoardGroup:
+      title: Flow Board Group
+      type: object
+      required:
+        - id
+        - created
+        - name
+        - color
+      properties:
+        id:
+          type: string
+          description: Identifier of the flow board group
+        created:
+          type: integer
+          format: timestamp
+          description: The unix timestamp when the color was created
+        name:
+          type: string
+          description: Name of the flow board
+        color:
+          $ref: "#/components/schemas/ColorData"
+      example:
+        $ref: "#/components/examples/flowBoardGroup"
+    FlowBoardConnector:
+      title: Flow Board Connector
+      type: object
+      required:
+        - id
+        - type
+        - start
+        - end
+      properties:
+        id:
+          type: string
+          description: The unique id of the connector
+        type:
+          type: string
+          enum:
+            - SolidLine
+            - DashedLine
+        start:
+          $ref: "#/components/schemas/FlowBoardConnection"
+        end:
+          $ref: "#/components/schemas/FlowBoardConnection"
+        label:
+          $ref: "#/components/schemas/FlowBoardConnectorLabel"
+        color:
+          type: string
+          enum:
+            - yellow
+            - orange
+            - peach
+            - green
+            - turquoise
+          description: Color for the connector
+      example:
+        $ref: "#/components/examples/flowBoardConnector"
+    FlowBoardConnectionPosition:
+      title: Flow Board Connection Position
+      type: object
+      required:
+        - dot_index
+        - side
+      properties:
+        dot_index:
+          type: number
+        side:
+          type: string
+          enum:
+            - left
+            - right
+            - bottom
+            - top
+      example:
+        $ref: "#/components/examples/flowBoardConnectionPosition"
+    FlowBoardConnection:
+      title: Flow Board Connection
+      type: object
+      required:
+        - node
+      properties:
+        node:
+          $ref: "#/components/schemas/EntityReference"
+        style:
+          type: string
+          enum:
+            - arrow
+            - point
+        layer_source_id:
+          type: string
+          description: Layer's identifier in the design tool
+        connection_position:
+          $ref: "#/components/schemas/FlowBoardConnectionPosition"
+      example:
+        $ref: "#/components/examples/flowBoardConnection"
+    FlowBoardConnectorLabel:
+      title: Flow Board Connector Label
+      type: object
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          description: Text for the connector label
+        position:
+          type: number
+          description: Percentage based position of the connector label
+        width:
+          type: number
+          description: Width of the connector label
+      example:
+        $ref: "#/components/examples/flowBoardConnectorLabel"
+    FlowBoardNode:
+      title: Flow Board Node
+      discriminator:
+        propertyName: type
+        mapping:
+          Screen: "#/components/schemas/FlowBoardScreenNode"
+          Text: "#/components/schemas/FlowBoardTextNode"
+          VariantGroup: "#/components/schemas/FlowBoardVariantGroupNode"
+      oneOf:
+        - $ref: "#/components/schemas/FlowBoardScreenNode"
+        - $ref: "#/components/schemas/FlowBoardTextNode"
+        - $ref: "#/components/schemas/FlowBoardVariantGroupNode"
+      x-examples:
+        Board Screen Node:
+          $ref: "#/components/examples/flowBoardScreenNode"
+        Board Text Node:
+          $ref: "#/components/examples/flowBoardTextNode"
+        Board Variant Group Node:
+          $ref: "#/components/examples/flowBoardVariantGroupNode"
+    FlowBoardScreenNode:
+      title: Flow Board Screen Node
+      type: object
+      required:
+        - id
+        - type
+        - position
+        - screen
+      properties:
+        id:
+          type: string
+          description: The unique id of the screen node
+        type:
+          type: string
+          enum:
+            - Screen
+        position:
+          $ref: "#/components/schemas/FlowBoardPosition"
+        screen:
+          $ref: "#/components/schemas/EntityReference"
+      example:
+        $ref: "#/components/examples/flowBoardScreenNode"
+    FlowBoardTextNode:
+      title: Flow Board Text Node
+      type: object
+      required:
+        - id
+        - type
+        - position
+        - text
+        - width
+      properties:
+        id:
+          type: string
+          description: The unique id of the text node
+        type:
+          type: string
+          enum:
+            - Text
+        position:
+          $ref: "#/components/schemas/FlowBoardPosition"
+        text:
+          type: string
+        width:
+          type: number
+      example:
+        $ref: "#/components/examples/flowBoardTextNode"
+    FlowBoardVariantGroupNode:
+      title: Flow Board Variant Group Node
+      type: object
+      required:
+        - id
+        - type
+        - position
+        - variant_group
+        - default_variant
+      properties:
+        id:
+          type: string
+          description: The unique id of the variant group node
+        type:
+          type: string
+          enum:
+            - VariantGroup
+        position:
+          $ref: "#/components/schemas/FlowBoardPosition"
+        variant_group:
+          $ref: "#/components/schemas/EntityReference"
+        default_variant:
+          $ref: "#/components/schemas/EntityReference"
+      example:
+        $ref: "#/components/examples/flowBoardVariantGroupNode"
+    FlowBoardPosition:
+      title: Flow Board Position
+      type: object
+      required:
+        - x
+        - y
+      properties:
+        x:
+          type: number
+        y:
+          type: number
+      example:
+        $ref: "#/components/examples/flowBoardPosition"
     WebhookEvent:
       title: Webhook Event
       discriminator:
@@ -6982,6 +7417,7 @@ components:
           project.note: "#/components/schemas/ProjectNoteEvent"
           project.note.comment: "#/components/schemas/ProjectNoteCommentEvent"
           project.color: "#/components/schemas/ProjectColorEvent"
+          project.flow_board: "#/components/schemas/ProjectFlowBoardEvent"
           project.text_style: "#/components/schemas/ProjectTextStyleEvent"
           project.component: "#/components/schemas/ProjectComponentEvent"
           project.spacing_token: "#/components/schemas/ProjectSpacingTokenEvent"
@@ -7002,6 +7438,7 @@ components:
         - $ref: "#/components/schemas/ProjectNoteEvent"
         - $ref: "#/components/schemas/ProjectNoteCommentEvent"
         - $ref: "#/components/schemas/ProjectColorEvent"
+        - $ref: "#/components/schemas/ProjectFlowBoardEvent"
         - $ref: "#/components/schemas/ProjectTextStyleEvent"
         - $ref: "#/components/schemas/ProjectComponentEvent"
         - $ref: "#/components/schemas/ProjectSpacingTokenEvent"
@@ -8854,6 +9291,65 @@ components:
           $ref: "#/components/schemas/ProjectColorEventContext"
         actor:
           $ref: "#/components/schemas/WebhookEventActor"
+    ProjectFlowBoardEvent:
+      title: Project Flow Board Event
+      description: This event is used to notify webhooks about changes related to
+        boards in Zeplin projects.
+      discriminator:
+        propertyName: action
+        mapping:
+          built: "#/components/schemas/ProjectFlowBoardBuiltEvent"
+      oneOf:
+        - $ref: "#/components/schemas/ProjectFlowBoardBuiltEvent"
+    ProjectFlowBoardEventContext:
+      title: Project Flow Board Event Context
+      type: object
+      required:
+        - project
+      properties:
+        project:
+          description: Project that contains the flow board
+          $ref: "#/components/schemas/Project"
+    ProjectFlowBoardBuiltEvent:
+      title: Project Flow Board Built Event
+      type: object
+      required:
+        - event
+        - action
+        - timestamp
+        - resource
+        - actor
+        - context
+      properties:
+        event:
+          type: string
+          enum:
+            - project.flow_board
+        action:
+          type: string
+          enum:
+            - built
+        timestamp:
+          type: number
+        resource:
+          type: object
+          required:
+            - id
+            - type
+            - data
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum:
+                - FlowBoard
+            data:
+              $ref: "#/components/schemas/FlowBoard"
+        context:
+          $ref: "#/components/schemas/ProjectFlowBoardEventContext"
+        actor:
+          $ref: "#/components/schemas/WebhookEventActor"
     ProjectTextStyleEvent:
       title: Project Text Style Event
       description: This event is used to notify webhooks about changes related to a
@@ -10105,6 +10601,109 @@ components:
         url: http://placekitten.com/100/200
         format: png
         density: 1
+    flowBoard:
+      summary: Flow Board
+      value:
+        id: 5dbad85a76ea51c1f35b6f69
+        name: Example Flow Board Name
+        number_of_connectors: 5
+        number_of_nodes: 4
+        number_of_groups: 1
+    flowBoardPosition:
+      summary: Flow Board Position
+      value:
+        x: 23
+        y: 45
+    flowBoardConnectionPosition:
+      summary: Flow Board Connection Position
+      value:
+        dot_index: 10
+        side: left
+    flowBoardConnection:
+      summary: Flow Board Connection
+      value:
+        node:
+          id: 60019c81b51d170c91de7623
+        style: arrow
+        board_connector_position:
+          dotIndex: 23
+          side: left
+    flowBoardConnector:
+      summary: Flow Board Connector
+      value:
+        id: 610cd30ff252160033aa5ab9
+        type: SolidLine
+        start:
+          node:
+            id: 60019c81b51d170c91de7623
+          node_position:
+            x: 23
+            y: 45
+        end:
+          node:
+            id: 5d9caaecb4a3fa9bc9718686
+          node_position:
+            x: 46
+            y: 90
+          label:
+            text: If sucessful
+            position: 0.5
+            width: 50
+            color: orange
+    flowBoardConnectorLabel:
+      summary: Flow Board Connector Label
+      value:
+        text: If sucessful
+        position: 0.5
+        width: 50
+    flowBoardNode:
+      summary: Flow Board Node
+      value:
+        id: 610cd30ff252160033aa5ab9
+        type: Screen
+        screen:
+          id: 60019c81b51d170c91de7623
+        position:
+          $ref: "#/components/examples/flowBoardPosition/value"
+    flowBoardScreenNode:
+      summary: Flow Board Screen Node
+      value:
+        id: 610cd30ff252160033aa5ab9
+        type: Screen
+        screen:
+          id: 60019c81b51d170c91de7623
+        position:
+          $ref: "#/components/examples/flowBoardPosition/value"
+    flowBoardTextNode:
+      summary: Flow Board Text Node
+      value:
+        id: 610cd30ff252160033aa5ab9
+        type: Text
+        text: Authentication check
+        width: 10
+        position:
+          x: 23
+          y: 45
+    flowBoardVariantGroupNode:
+      summary: Flow Board Variant Group Node
+      value:
+        id: 610cd30ff252160033aa5ab9
+        type: VariantGroup
+        variant_group:
+          id: 60019c81b51d170c91de7623
+        default_variant:
+          id: 60a36e45217f0d329834774e
+        position:
+          x: 23
+          y: 45
+    flowBoardGroup:
+      summary: Flow Board Group
+      value:
+        id: 5dbad85a76ea51c1f35b6f69
+        created: 1517184000
+        name: example board group name
+        color:
+          $ref: "#/components/examples/colorData/value"
     boundingRectangle:
       summary: Bounding Rectangle
       value:
@@ -11401,6 +12000,54 @@ components:
       schema:
         type: string
         pattern: /^[0-9a-f]{24}$/i
+    node_id:
+      name: node_id
+      in: path
+      description: Board node id
+      required: true
+      schema:
+        type: string
+        pattern: /^[0-9a-f]{24}$/i
+    connector_id:
+      name: connector_id
+      in: path
+      description: Board connector id
+      required: true
+      schema:
+        type: string
+        pattern: /^[0-9a-f]{24}$/i
+    flow_board_id:
+      name: flow_board_id
+      in: path
+      description: Flow Board id
+      required: true
+      schema:
+        type: string
+        pattern: /^[0-9a-f]{24}$/i
+    group_id:
+      name: group_id
+      in: query
+      description: Group id
+      required: false
+      schema:
+        type: string
+        pattern: /^[0-9a-f]{24}$/i
+    starting_node_id:
+      name: starting_node_id
+      in: query
+      description: Starting node id
+      required: false
+      schema:
+        type: string
+        pattern: /^[0-9a-f]{24}$/i
+    ending_node_id:
+      name: ending_node_id
+      in: query
+      description: Ending node id
+      required: false
+      schema:
+        type: string
+        pattern: /^[0-9a-f]{24}$/i
     offset:
       name: offset
       in: query
@@ -12581,6 +13228,45 @@ components:
             Spacing token not found:
               value:
                 message: Spacing token not found
+    projectOrFlowBoardConnectorNotFound:
+      description: Project or flow board connector not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          examples:
+            Project not found:
+              value:
+                message: Project not found
+            Flow Board connector not found:
+              value:
+                message: Flow Board connector not found
+    projectOrFlowBoardNodeNotFound:
+      description: Project or flow board node not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          examples:
+            Project not found:
+              value:
+                message: Project not found
+            Flow Board node not found:
+              value:
+                message: Flow Board node not found
+    projectOrFlowBoardNotFound:
+      description: Project or flow board not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          examples:
+            Project not found:
+              value:
+                message: Project not found
+            Flow Board not found:
+              value:
+                message: Flow Board not found
   securitySchemes:
     OAuth2:
       type: oauth2
