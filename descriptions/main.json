@@ -3,7 +3,7 @@
   "info": {
     "title": "Zeplin API",
     "description": "Access your resources in Zeplin",
-    "version": "1.10.0",
+    "version": "1.11.0",
     "contact": {
       "name": "Zeplin",
       "url": "https://zeplin.io",
@@ -2117,6 +2117,12 @@
                 }
               }
             }
+          },
+          "404": {
+            "$ref": "#/components/responses/projectScreenOrNoteNotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/projectArchived"
           }
         }
       },
@@ -2157,6 +2163,36 @@
           },
           "422": {
             "$ref": "#/components/responses/notAProjectMemberOrArchived"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Screens"
+        ],
+        "summary": "Delete a note",
+        "description": "Delete a note on the screen",
+        "operationId": "DeleteScreenNote",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          },
+          {
+            "$ref": "#/components/parameters/screen_id"
+          },
+          {
+            "$ref": "#/components/parameters/screen_note_id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/noContent"
+          },
+          "404": {
+            "$ref": "#/components/responses/projectScreenOrNoteNotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/notNoteCreatorOrProjectArchived"
           }
         }
       }
@@ -2256,6 +2292,39 @@
           },
           "422": {
             "$ref": "#/components/responses/unproccessableEntityUpdateComment"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Screens"
+        ],
+        "summary": "Delete comment",
+        "description": "Delete a comment on the screen note",
+        "operationId": "DeleteScreenComment",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          },
+          {
+            "$ref": "#/components/parameters/screen_id"
+          },
+          {
+            "$ref": "#/components/parameters/screen_note_id"
+          },
+          {
+            "$ref": "#/components/parameters/screen_comment_id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/noContent"
+          },
+          "404": {
+            "$ref": "#/components/responses/projectScreenNoteOrCommentNotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/notCommentAuthorOrProjectArchived"
           }
         }
       }
@@ -18527,6 +18596,28 @@
           }
         }
       },
+      "notCommentAuthorOrProjectArchived": {
+        "description": "Not the author of the comment or project archived",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "examples": {
+              "Not the author of the comment": {
+                "value": {
+                  "message": "User is not the author of the comment"
+                }
+              },
+              "Project is archived": {
+                "value": {
+                  "message": "Project is archived"
+                }
+              }
+            }
+          }
+        }
+      },
       "notificationNotFound": {
         "description": "Notification not found response",
         "content": {
@@ -18538,6 +18629,28 @@
               "Notification not found response": {
                 "value": {
                   "message": "Notification not found"
+                }
+              }
+            }
+          }
+        }
+      },
+      "notNoteCreatorOrProjectArchived": {
+        "description": "Not the creator of the note or project archived",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "examples": {
+              "Not the creator of the note": {
+                "value": {
+                  "message": "User is not the creator of the note"
+                }
+              },
+              "Project is archived": {
+                "value": {
+                  "message": "Project is archived"
                 }
               }
             }
