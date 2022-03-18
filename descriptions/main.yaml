@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Zeplin API
   description: Access your resources in Zeplin
-  version: 1.11.0
+  version: 1.12.0
   contact:
     name: Zeplin
     url: https://zeplin.io
@@ -7340,13 +7340,15 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          Screen: "#/components/schemas/FlowBoardScreenNode"
-          Text: "#/components/schemas/FlowBoardTextNode"
-          VariantGroup: "#/components/schemas/FlowBoardVariantGroupNode"
+          ScreenNode: "#/components/schemas/FlowBoardScreenNode"
+          TextLabelNode: "#/components/schemas/FlowBoardTextNode"
+          VariantGroupNode: "#/components/schemas/FlowBoardVariantGroupNode"
+          ShapeNode: "#/components/schemas/FlowBoardShapeNode"
       oneOf:
         - $ref: "#/components/schemas/FlowBoardScreenNode"
         - $ref: "#/components/schemas/FlowBoardTextNode"
         - $ref: "#/components/schemas/FlowBoardVariantGroupNode"
+        - $ref: "#/components/schemas/FlowBoardShapeNode"
       x-examples:
         Board Screen Node:
           $ref: "#/components/examples/flowBoardScreenNode"
@@ -7354,6 +7356,8 @@ components:
           $ref: "#/components/examples/flowBoardTextNode"
         Board Variant Group Node:
           $ref: "#/components/examples/flowBoardVariantGroupNode"
+        Board Shape Node:
+          $ref: "#/components/examples/flowBoardShapeNode"
     FlowBoardScreenNode:
       title: Flow Board Screen Node
       type: object
@@ -7369,7 +7373,7 @@ components:
         type:
           type: string
           enum:
-            - Screen
+            - ScreenNode
         position:
           $ref: "#/components/schemas/FlowBoardPosition"
         screen:
@@ -7392,7 +7396,7 @@ components:
         type:
           type: string
           enum:
-            - Text
+            - TextLabelNode
         position:
           $ref: "#/components/schemas/FlowBoardPosition"
         text:
@@ -7401,6 +7405,44 @@ components:
           type: number
       example:
         $ref: "#/components/examples/flowBoardTextNode"
+    FlowBoardShapeNode:
+      title: Flow Board Shape Node
+      type: object
+      required:
+        - id
+        - type
+        - shape_type
+        - position
+        - text
+        - width
+        - height
+        - color
+      properties:
+        id:
+          type: string
+          description: The unique id of the shape node
+        type:
+          type: string
+          enum:
+            - ShapeNode
+        shape_type:
+          type: string
+          enum:
+            - rectangle
+            - pill
+            - diamond
+        position:
+          $ref: "#/components/schemas/FlowBoardPosition"
+        text:
+          type: string
+        width:
+          type: number
+        height:
+          type: number
+        color:
+          $ref: "#/components/schemas/FlowBoardNodeColor"
+      example:
+        $ref: "#/components/examples/flowBoardShapeNode"
     FlowBoardVariantGroupNode:
       title: Flow Board Variant Group Node
       type: object
@@ -7417,7 +7459,7 @@ components:
         type:
           type: string
           enum:
-            - VariantGroup
+            - VariantGroupNode
         position:
           $ref: "#/components/schemas/FlowBoardPosition"
         variant_group:
@@ -7439,6 +7481,29 @@ components:
           type: number
       example:
         $ref: "#/components/examples/flowBoardPosition"
+    FlowBoardNodeColor:
+      title: Flow Board Node Color
+      type: object
+      required:
+        - r
+        - g
+        - b
+        - a
+      properties:
+        r:
+          type: integer
+          description: Red component of the color
+        g:
+          type: integer
+          description: Green component of the color
+        b:
+          type: integer
+          description: Blue component of the color
+        a:
+          type: number
+          description: Alpha component of the color
+      example:
+        $ref: "#/components/examples/flowBoardNodeColor"
     WebhookEvent:
       title: Webhook Event
       discriminator:
@@ -10699,7 +10764,7 @@ components:
       summary: Flow Board Node
       value:
         id: 610cd30ff252160033aa5ab9
-        type: Screen
+        type: ScreenNode
         screen:
           id: 60019c81b51d170c91de7623
         position:
@@ -10708,7 +10773,7 @@ components:
       summary: Flow Board Screen Node
       value:
         id: 610cd30ff252160033aa5ab9
-        type: Screen
+        type: ScreenNode
         screen:
           id: 60019c81b51d170c91de7623
         position:
@@ -10717,9 +10782,23 @@ components:
       summary: Flow Board Text Node
       value:
         id: 610cd30ff252160033aa5ab9
-        type: Text
+        type: TextLabelNode
         text: Authentication check
         width: 10
+        position:
+          x: 23
+          y: 45
+    flowBoardShapeNode:
+      summary: Flow Board Shape Node
+      value:
+        id: 610cd30ff252160033aa5ab9
+        type: ShapeNode
+        shape_type: rectangle
+        text: Login
+        width: 100
+        height: 100
+        color:
+          $ref: "#/components/examples/flowBoardNodeColor/value"
         position:
           x: 23
           y: 45
@@ -10727,7 +10806,7 @@ components:
       summary: Flow Board Variant Group Node
       value:
         id: 610cd30ff252160033aa5ab9
-        type: VariantGroup
+        type: VariantGroupNode
         variant_group:
           id: 60019c81b51d170c91de7623
         default_variant:
@@ -10743,6 +10822,13 @@ components:
         name: example board group name
         color:
           $ref: "#/components/examples/colorData/value"
+    flowBoardNodeColor:
+      summary: Flow Board Node Color
+      value:
+        r: 255
+        g: 255
+        b: 0
+        a: 1
     boundingRectangle:
       summary: Bounding Rectangle
       value:
