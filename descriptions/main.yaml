@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Zeplin API
   description: Access your resources in Zeplin
-  version: 1.13.0
+  version: 1.14.0
   contact:
     name: Zeplin
     url: https://zeplin.io
@@ -22,6 +22,22 @@ paths:
         authorize the app with `client_id` to act on behalf of themselves.
       operationId: OAuthAuthorize
       security: []
+      x-readme:
+        code-samples:
+          - language: node
+            name: sdk
+            code: |
+              import { ZeplinApi }  from "@zeplin/sdk";
+
+              const zeplin = new ZeplinApi();
+
+              const redirectUrl = zeplin.authorization.getAuthorizationUrl({
+                clientId: "YOUR_CLIENT_ID",
+                redirectUri: "YOUR_REDIRECT_URI",
+                state: "YOUR_STATE", // Optional
+                codeChallenge: "YOUR_CODE_CHALLENGE", // Optional
+                codeChallengeMethod: "S256" // or "plain" (optional)
+              });
       parameters:
         - name: response_type
           in: query
@@ -75,6 +91,55 @@ paths:
         flow.
       operationId: OAuthPostToken
       security: []
+      x-readme:
+        code-samples:
+          - language: node
+            name: sdk
+            code: >
+              import { 
+                ZeplinApi,
+                Configuration
+              }  from "@zeplin/sdk";
+
+
+              let zeplin = new ZeplinApi();
+
+
+              const createTokenResponse = await zeplin.authorization.createToken({
+                code: "CODE_FROM_AUTHORIZATION_CODE_FLOW",
+                clientId: "YOUR_CLIENT_ID",
+                clientSecret: "YOUR_CLIENT_SECRET",
+                redirectUri: "YOUR_REDIRECT_URI",
+                codeVerifier: "YOUR_CODE_VERIFIER", // If PKCE is used
+              });
+
+
+              zeplin = new ZeplinApi(
+                new Configuration({ 
+                  accessToken: createTokenResponse.data.access_token 
+                })
+              );
+
+
+              // You can now use `zeplin` to make requests to the Zeplin API
+
+
+              // When a token expires, you can refresh it with the `refresh_token`
+
+
+              const refreshTokenResponse = await zeplin.authorization.refreshToken({
+                refreshToken: createTokenResponse.data.refresh_token, // or refresh_token from previous refreshToken response
+                clientId: "YOUR_CLIENT_ID",
+                clientSecret: "YOUR_CLIENT_SECRET",
+                codeVerifier: "YOUR_CODE_VERIFIER", // If PKCE is used
+              });
+
+
+              zeplin = new ZeplinApi(
+                new Configuration({ 
+                   accessToken: refreshTokenResponse.data.access_token 
+                })
+              );
       requestBody:
         required: true
         content:
