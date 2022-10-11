@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Zeplin API
   description: Access your resources in Zeplin
-  version: 1.14.0
+  version: 1.15.0
   contact:
     name: Zeplin
     url: https://zeplin.io
@@ -4181,6 +4181,8 @@ components:
         description:
           type: string
           description: The description of the screen section
+        parent:
+          $ref: "#/components/schemas/EntityReference"
       example:
         $ref: "#/components/examples/screenSection"
     ScreenVariant:
@@ -11626,6 +11628,8 @@ components:
         id: 5db81e73e1e36ee19f138c1a
         created: 1517184000
         name: Radar
+        parent:
+          id: 5db81e73e1e36ee19f138c1b
     screenVersion:
       summary: Screen Version
       value:
