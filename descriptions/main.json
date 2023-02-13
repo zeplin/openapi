@@ -3,7 +3,7 @@
   "info": {
     "title": "Zeplin API",
     "description": "Access your resources in Zeplin",
-    "version": "1.15.0",
+    "version": "1.16.0",
     "contact": {
       "name": "Zeplin",
       "url": "https://zeplin.io",
@@ -1490,8 +1490,75 @@
           "404": {
             "$ref": "#/components/responses/projectNotFound"
           },
+          "409": {
+            "description": "Conflict response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "Project already has styleguide": {
+                    "value": {
+                      "message": "Project already has a linked styleguide. Only projects without a linked styleguide can be linked to a styleguide"
+                    }
+                  },
+                  "Invalid styleguide project type": {
+                    "value": {
+                      "message": "Styleguide type is not compatible with the project type"
+                    }
+                  },
+                  "User not have styleguide": {
+                    "value": {
+                      "message": "You’re not invited to this styleguide",
+                      "detail": "Either project's and styleguide's subscription types are different or they belong to different owners"
+                    }
+                  }
+                }
+              }
+            }
+          },
           "422": {
-            "$ref": "#/components/responses/notAProjectMemberOrArchived"
+            "description": "Unprocessable entity response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "Not a member": {
+                    "value": {
+                      "message": "User is not a member of the project"
+                    }
+                  },
+                  "Project is archived": {
+                    "value": {
+                      "message": "Project is archived"
+                    }
+                  },
+                  "Workflow status not found": {
+                    "value": {
+                      "message": "Workflow status not found"
+                    }
+                  },
+                  "Styleguide not found": {
+                    "value": {
+                      "message": "Styleguide not found"
+                    }
+                  },
+                  "Styleguide is archived": {
+                    "value": {
+                      "message": "Styleguide is archived"
+                    }
+                  },
+                  "Project is onboarding": {
+                    "value": {
+                      "message": "Can not do this action from an onboarding project"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -3808,6 +3875,9 @@
           },
           "404": {
             "$ref": "#/components/responses/styleguideNotFound"
+          },
+          "412": {
+            "$ref": "#/components/responses/invalidParentStyleguide"
           },
           "422": {
             "$ref": "#/components/responses/notAStyleguideMemberOrArchived"
@@ -10672,6 +10742,11 @@
           "workflow_status_id": {
             "type": "string",
             "description": "Id of the new workflow status for the project"
+          },
+          "linked_styleguide_id": {
+            "type": "string",
+            "nullable": true,
+            "description": "The unique id of the styleguide to be linked. Set null to unlink the linked styleguide."
           }
         }
       },
@@ -10704,6 +10779,11 @@
           "description": {
             "type": "string",
             "description": "New description for the styleguide"
+          },
+          "linked_parent_styleguide_id": {
+            "type": "string",
+            "nullable": true,
+            "description": "The unique id of the styleguide to be linked as parent. Set null to unlink the linked parent styleguide."
           }
         }
       },
@@ -19754,6 +19834,23 @@
               "Flow Board not found": {
                 "value": {
                   "message": "Flow Board not found"
+                }
+              }
+            }
+          }
+        }
+      },
+      "invalidParentStyleguide": {
+        "description": "Invalid parent styleguide",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "examples": {
+              "Invalid parent styleguide response": {
+                "value": {
+                  "message": "Invalid master styleguide. Please select another styleguide and try again"
                 }
               }
             }
