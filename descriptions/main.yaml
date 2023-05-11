@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Zeplin API
   description: Access your resources in Zeplin
-  version: 1.17.0
+  version: 1.18.0
   contact:
     name: Zeplin
     url: https://zeplin.io
@@ -1492,6 +1492,155 @@ paths:
           $ref: "#/components/responses/projectScreenNoteOrCommentNotFound"
         "422":
           $ref: "#/components/responses/notCommentAuthorOrProjectArchived"
+  "/v1/projects/{project_id}/screens/{screen_id}/annotations":
+    get:
+      tags:
+        - Screens
+      summary: Get screen annotations
+      description: List all annotations in the screen
+      operationId: GetScreenAnnotations
+      parameters:
+        - $ref: "#/components/parameters/project_id"
+        - $ref: "#/components/parameters/screen_id"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ScreenAnnotation"
+              examples:
+                Screen Annotations:
+                  value:
+                    - $ref: "#/components/examples/screenAnnotation/value"
+        "404":
+          $ref: "#/components/responses/projectOrScreenNotFound"
+        "422":
+          $ref: "#/components/responses/projectArchived"
+    post:
+      tags:
+        - Screens
+      summary: Create an annotation
+      description: Create an annotation on the screen
+      operationId: CreateScreenAnnotation
+      parameters:
+        - $ref: "#/components/parameters/project_id"
+        - $ref: "#/components/parameters/screen_id"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScreenAnnotationCreateBody"
+      responses:
+        "201":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EntityReference"
+              examples:
+                response:
+                  $ref: "#/components/examples/entityReference"
+        "404":
+          $ref: "#/components/responses/projectOrScreenNotFound"
+        "422":
+          $ref: "#/components/responses/notAProjectMemberOrArchived"
+  "/v1/projects/{project_id}/screens/{screen_id}/annotations/{annotation_id}":
+    get:
+      tags:
+        - Screens
+      summary: Get a single screen annotation
+      description: Get a screen annotation by id
+      operationId: GetScreenAnnotation
+      parameters:
+        - $ref: "#/components/parameters/project_id"
+        - $ref: "#/components/parameters/screen_id"
+        - $ref: "#/components/parameters/screen_annotation_id"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScreenAnnotation"
+              examples:
+                response:
+                  $ref: "#/components/examples/screenAnnotation"
+        "404":
+          $ref: "#/components/responses/projectScreenOrAnnotationNotFound"
+        "422":
+          $ref: "#/components/responses/projectArchived"
+    patch:
+      tags:
+        - Screens
+      summary: Update an annotation
+      description: Update an annotation on the screen
+      operationId: UpdateScreenAnnotation
+      parameters:
+        - $ref: "#/components/parameters/project_id"
+        - $ref: "#/components/parameters/screen_id"
+        - $ref: "#/components/parameters/screen_annotation_id"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScreenAnnotationUpdateBody"
+      responses:
+        "204":
+          $ref: "#/components/responses/noContent"
+        "404":
+          $ref: "#/components/responses/projectScreenOrAnnotationNotFound"
+        "422":
+          $ref: "#/components/responses/notAProjectMemberOrArchived"
+    delete:
+      tags:
+        - Screens
+      summary: Delete an annotation
+      description: Delete an annotation on the screen
+      operationId: DeleteScreenAnnotation
+      parameters:
+        - $ref: "#/components/parameters/project_id"
+        - $ref: "#/components/parameters/screen_id"
+        - $ref: "#/components/parameters/screen_annotation_id"
+      responses:
+        "204":
+          $ref: "#/components/responses/noContent"
+        "404":
+          $ref: "#/components/responses/projectScreenOrAnnotationNotFound"
+        "422":
+          $ref: "#/components/responses/notAnnotationCreatorOrProjectArchived"
+  "/v1/projects/{project_id}/annotations/note_types":
+    get:
+      tags:
+        - Screens
+      summary: Get screen annotation note types
+      description: List all annotation note types in the project
+      operationId: GetScreenAnnotationsNoteTypes
+      parameters:
+        - $ref: "#/components/parameters/project_id"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ScreenAnnotationNoteType"
+              examples:
+                Screen Annotation Note Types:
+                  value:
+                    - $ref: "#/components/examples/screenAnnotationNoteType/value"
+        "404":
+          $ref: "#/components/responses/projectOrScreenNotFound"
+        "422":
+          $ref: "#/components/responses/projectArchived"
   "/v1/projects/{project_id}/screens/{screen_id}/versions":
     get:
       tags:
@@ -4204,6 +4353,98 @@ components:
           type: number
       example:
         $ref: "#/components/examples/screenNotePosition"
+    ScreenAnnotation:
+      title: Screen Annotation
+      type: object
+      required:
+        - id
+        - content
+        - type
+        - position
+        - creator
+        - updated
+        - created
+      properties:
+        id:
+          type: string
+          description: The unique id of the annotation
+        content:
+          type: string
+          description: The text of the annotation
+        type:
+          $ref: "#/components/schemas/ScreenAnnotationNoteType"
+        position:
+          $ref: "#/components/schemas/ScreenAnnotationPosition"
+        creator:
+          $ref: "#/components/schemas/User"
+        updated:
+          type: integer
+          format: timestamp
+          description: The unix timestamp when the annotation was last updated
+        created:
+          type: integer
+          format: timestamp
+          description: The unix timestamp when the annotation was created
+      example:
+        $ref: "#/components/examples/screenAnnotation"
+    ScreenAnnotationPosition:
+      title: Screen Annotation Position
+      description: Position of the annotation with respect to top left corner. Values
+        are normalized in [0, 1]
+      type: object
+      required:
+        - x
+        - y
+      properties:
+        x:
+          type: number
+        y:
+          type: number
+      example:
+        $ref: "#/components/examples/screenAnnotationPosition"
+    ScreenAnnotationNoteType:
+      title: Screen Annotation Note Type
+      type: object
+      required:
+        - id
+        - name
+        - color
+      properties:
+        id:
+          type: string
+          description: The unique id of the annotation
+        name:
+          $ref: "#/components/schemas/ScreenAnnotationNoteTypeEnum"
+          description: Name of the note type
+        color:
+          $ref: "#/components/schemas/ScreenAnnotationColor"
+          description: Color of the note type
+    ScreenAnnotationColor:
+      title: Screen Annotation Color
+      type: object
+      required:
+        - r
+        - g
+        - b
+        - a
+      properties:
+        name:
+          type: string
+          description: Name of the color
+        r:
+          type: integer
+          description: Red component of the color
+        g:
+          type: integer
+          description: Green component of the color
+        b:
+          type: integer
+          description: Blue component of the color
+        a:
+          type: number
+          description: Alpha component of the color
+      example:
+        $ref: "#/components/examples/screenAnnotationColor"
     ScreenSection:
       title: Screen Section
       type: object
@@ -6476,6 +6717,17 @@ components:
         - turquoise
         - cornflower_blue
         - deep_purple
+    ScreenAnnotationNoteTypeEnum:
+      title: Note Types
+      type: string
+      enum:
+        - Behavior
+        - Requirement
+        - Animation
+        - Accessibility
+        - API
+        - Tracking
+      description: Type of the annotation note
     BlendModeEnum:
       title: Blend Mode
       type: string
@@ -6982,6 +7234,33 @@ components:
         color:
           title: color
           $ref: "#/components/schemas/ScreenNoteColorNameEnum"
+    ScreenAnnotationCreateBody:
+      title: Screen Annotation Create Body
+      type: object
+      properties:
+        content:
+          type: string
+          description: Content of the annotation
+        position:
+          $ref: "#/components/schemas/ScreenAnnotationPosition"
+        type:
+          type: string
+          description: The unique id of the annotation type
+      required:
+        - content
+        - position
+    ScreenAnnotationUpdateBody:
+      title: Screen Annotation Update Body
+      type: object
+      properties:
+        content:
+          type: string
+          description: Content of the annotation
+        position:
+          $ref: "#/components/schemas/ScreenAnnotationPosition"
+        type:
+          type: string
+          description: The unique id of the annotation type
     SpacingTokenUpdateBody:
       title: Spacing Token Update Body
       type: object
@@ -11676,6 +11955,39 @@ components:
       value:
         x: 0.93
         y: 0.1
+    screenAnnotation:
+      summary: Screen Annotation
+      value:
+        id: 642dbd0527586e8ea06dc2d7
+        content: The button should be red.
+        type:
+          $ref: "#/components/examples/screenAnnotationNoteType/value"
+        position:
+          $ref: "#/components/examples/screenAnnotationPosition/value"
+        creator:
+          $ref: "#/components/examples/user/value"
+        updated: 1680719128
+        created: 1680719128
+    screenAnnotationPosition:
+      summary: Screen Annotation Position
+      value:
+        x: 0.93
+        y: 0.1
+    screenAnnotationNoteType:
+      summary: Screen Annotation Note Type
+      value:
+        id: 6436877c182345f62e94ab8e
+        name: Requirements
+        color:
+          $ref: "#/components/examples/screenAnnotationColor/value"
+    screenAnnotationColor:
+      summary: Screen Annotation Color
+      value:
+        name: yellow
+        r: 254
+        g: 207
+        b: 51
+        a: 1
     screenSection:
       summary: Screen Section
       value:
@@ -12180,6 +12492,14 @@ components:
       name: note_id
       in: path
       description: Screen note id
+      required: true
+      schema:
+        type: string
+        pattern: /^[0-9a-f]{24}$/i
+    screen_annotation_id:
+      name: annotation_id
+      in: path
+      description: Screen annotation id
       required: true
       schema:
         type: string
@@ -13143,6 +13463,35 @@ components:
             Note not found:
               value:
                 message: Note not found
+    projectScreenOrAnnotationNotFound:
+      description: Project, screen or annotation not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          examples:
+            Project not found:
+              value:
+                message: Project not found
+            Screen not found:
+              value:
+                message: Screen not found
+            Annotation not found:
+              value:
+                message: Annotation not found
+    notAnnotationCreatorOrProjectArchived:
+      description: Not the creator of the annotation or project archived
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          examples:
+            Not the creator of the annotation:
+              value:
+                message: User is not the creator of the annotation
+            Project is archived:
+              value:
+                message: Project is archived
     projectScreenOrVersionNotFound:
       description: Project, screen or version not found
       content:
