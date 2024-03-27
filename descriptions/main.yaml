@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Zeplin API
   description: Access your resources in Zeplin
-  version: 1.18.0
+  version: 1.19.0
   contact:
     name: Zeplin
     url: https://zeplin.io
@@ -1263,7 +1263,7 @@ paths:
         "404":
           $ref: "#/components/responses/projectOrScreenNotFound"
         "422":
-          $ref: "#/components/responses/notAProjectMemberOrArchived"
+          $ref: "#/components/responses/notAProjectMemberOrArchivedOrTagIsLocked"
   "/v1/projects/{project_id}/screens/{screen_id}/components":
     get:
       tags:
@@ -3895,6 +3895,9 @@ components:
         source:
           $ref: "#/components/schemas/ResourceSource"
           description: Source of the color–either `project` or `styleguide`.
+        variable_info:
+          $ref: "#/components/schemas/VariableInfo"
+          description: Variable info of the color
       example:
         $ref: "#/components/examples/color"
     ColorData:
@@ -7904,6 +7907,21 @@ components:
           description: Alpha component of the color
       example:
         $ref: "#/components/examples/flowBoardNodeColor"
+    VariableInfo:
+      title: Variable Info
+      type: object
+      required:
+        - source_id
+        - collection_source_id
+      properties:
+        source_id:
+          type: string
+          description: The source id of the variable
+        collection_source_id:
+          type: string
+          description: The source id of the collection that the variable belongs to
+      example:
+        $ref: "#/components/examples/variableInfo"
     WebhookEvent:
       title: Webhook Event
       discriminator:
@@ -11254,6 +11272,8 @@ components:
         g: 152
         b: 5
         a: 1
+        variable_info:
+          $ref: "#/components/examples/variableInfo/value"
         source:
           $ref: "#/components/examples/resourceSourceForProject/value"
     colorData:
@@ -12380,6 +12400,11 @@ components:
         emotar: 🍎
         avatar: http://placekitten.com/200/300
         last_seen: 1616739240
+    variableInfo:
+      summary: Variable Info
+      value:
+        source_id: 280c52e619f9c84a4e5e265bb746ede50d898cb3
+        collection_source_id: 4af2ee68305a9b4f0c655141e7ba01a51ab61bde
     versionCommit:
       summary: Version Commit
       value:
@@ -13211,6 +13236,22 @@ components:
             Project is archived:
               value:
                 message: Project is archived
+    notAProjectMemberOrArchivedOrTagIsLocked:
+      description: Not a project member or project archived or tag is locked
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          examples:
+            Not a member:
+              value:
+                message: User is not a member of the project
+            Project is archived:
+              value:
+                message: Project is archived
+            Tag is locked:
+              value:
+                message: Tag is locked
     notAProjectMemberOrArchivedOrScreenExists:
       description: Not a project member or project archived or screen with name
         already exists
