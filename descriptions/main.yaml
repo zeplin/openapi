@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Zeplin API
   description: Access your resources in Zeplin
-  version: 1.19.0
+  version: 1.20.0
   contact:
     name: Zeplin
     url: https://zeplin.io
@@ -4240,6 +4240,7 @@ components:
         - created
         - number_of_versions
         - number_of_notes
+        - number_of_annotations
       properties:
         id:
           type: string
@@ -4271,6 +4272,9 @@ components:
         number_of_notes:
           type: integer
           description: The number of notes in the screen
+        number_of_annotations:
+          type: integer
+          description: The number of annotations in the screen
         section:
           $ref: "#/components/schemas/EntityReference"
           description: Reference of the section that contains the screen
@@ -11929,6 +11933,7 @@ components:
         updated: 1572347818
         number_of_notes: 7
         number_of_versions: 4
+        number_of_annotations: 2
         section:
           id: 5db81e6e6a4462065f04d932
         variant:
