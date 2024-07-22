@@ -3,7 +3,7 @@
   "info": {
     "title": "Zeplin API",
     "description": "Access your resources in Zeplin",
-    "version": "1.21.0",
+    "version": "1.22.0",
     "contact": {
       "name": "Zeplin",
       "url": "https://zeplin.io",
@@ -4006,6 +4006,399 @@
         }
       }
     },
+    "/v1/projects/{project_id}/flow_boards": {
+      "get": {
+        "tags": [
+          "Flows"
+        ],
+        "summary": "Get project flow boards",
+        "description": "List all flow boards in a project.",
+        "operationId": "GetProjectFlowBoards",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FlowBoard"
+                  }
+                },
+                "examples": {
+                  "Boards": {
+                    "value": [
+                      {
+                        "$ref": "#/components/examples/flowBoard/value"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/projectNotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/projectArchived"
+          }
+        }
+      }
+    },
+    "/v1/projects/{project_id}/flow_boards/{flow_board_id}": {
+      "get": {
+        "tags": [
+          "Flows"
+        ],
+        "summary": "Get a single project flow board",
+        "description": "Get flow board details related to a project",
+        "operationId": "GetProjectFlowBoard",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          },
+          {
+            "$ref": "#/components/parameters/flow_board_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlowBoard"
+                },
+                "examples": {
+                  "Board": {
+                    "$ref": "#/components/examples/flowBoard"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/projectOrFlowBoardNotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/projectArchived"
+          }
+        }
+      }
+    },
+    "/v1/projects/{project_id}/flow_boards/{flow_board_id}/groups": {
+      "get": {
+        "tags": [
+          "Flows"
+        ],
+        "summary": "Get project flow board groups",
+        "description": "List all flow board groups in a project.",
+        "operationId": "GetProjectFlowBoardGroups",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          },
+          {
+            "$ref": "#/components/parameters/flow_board_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FlowBoardGroup"
+                  }
+                },
+                "examples": {
+                  "Board Group": {
+                    "value": [
+                      {
+                        "$ref": "#/components/examples/flowBoardGroup/value"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/projectOrFlowBoardNotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/projectArchived"
+          }
+        }
+      }
+    },
+    "/v1/projects/{project_id}/flow_boards/{flow_board_id}/connectors": {
+      "get": {
+        "tags": [
+          "Flows"
+        ],
+        "summary": "Get project flow board connectors",
+        "description": "List all connectors of the flow board in a project",
+        "operationId": "GetProjectFlowBoardConnectors",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          },
+          {
+            "$ref": "#/components/parameters/flow_board_id"
+          },
+          {
+            "$ref": "#/components/parameters/starting_node_id"
+          },
+          {
+            "$ref": "#/components/parameters/ending_node_id"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FlowBoardConnector"
+                  }
+                },
+                "examples": {
+                  "Board Connectors": {
+                    "value": [
+                      {
+                        "$ref": "#/components/examples/flowBoardConnector/value"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/projectNotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/projectArchived"
+          }
+        }
+      }
+    },
+    "/v1/projects/{project_id}/flow_boards/{flow_board_id}/connectors/{connector_id}": {
+      "get": {
+        "tags": [
+          "Flows"
+        ],
+        "summary": "Get a single project flow board connector",
+        "description": "Get details of the project flow board connector",
+        "operationId": "GetProjectFlowBoardConnector",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          },
+          {
+            "$ref": "#/components/parameters/flow_board_id"
+          },
+          {
+            "$ref": "#/components/parameters/connector_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlowBoardConnector"
+                },
+                "examples": {
+                  "response": {
+                    "$ref": "#/components/examples/flowBoardConnector"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/projectOrFlowBoardConnectorNotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/projectArchived"
+          }
+        }
+      }
+    },
+    "/v1/projects/{project_id}/flow_boards/{flow_board_id}/nodes": {
+      "get": {
+        "tags": [
+          "Flows"
+        ],
+        "summary": "Get project flow board nodes",
+        "description": "List all nodes of the flow board in a project",
+        "operationId": "GetProjectFlowBoardNodes",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          },
+          {
+            "$ref": "#/components/parameters/flow_board_id"
+          },
+          {
+            "$ref": "#/components/parameters/group_id"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FlowBoardNode"
+                  }
+                },
+                "examples": {
+                  "Board Nodes": {
+                    "value": [
+                      {
+                        "$ref": "#/components/examples/flowBoardNode/value"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/projectNotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/projectArchived"
+          }
+        }
+      }
+    },
+    "/v1/projects/{project_id}/flow_boards/{flow_board_id}/nodes/{node_id}": {
+      "get": {
+        "tags": [
+          "Flows"
+        ],
+        "summary": "Get a single project flow board node",
+        "description": "Get details of the project flow board node",
+        "operationId": "GetProjectFlowBoardNode",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          },
+          {
+            "$ref": "#/components/parameters/flow_board_id"
+          },
+          {
+            "$ref": "#/components/parameters/node_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlowBoardNode"
+                },
+                "examples": {
+                  "response": {
+                    "$ref": "#/components/examples/flowBoardNode"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/projectOrFlowBoardNodeNotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/projectArchived"
+          }
+        }
+      }
+    },
+    "/v1/projects/{project_id}/variable_collections": {
+      "get": {
+        "tags": [
+          "Variable Collections"
+        ],
+        "summary": "Get project variable collections",
+        "description": "This endpoint returns all of the color variables in a project\n\nYou need to be a member of the project or a member of the organization that owns the project. Returns `Not Found` response otherwise.\n",
+        "operationId": "GetProjectVariableCollections",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/include_linked_styleguides"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VariableCollection"
+                  }
+                },
+                "examples": {
+                  "Project Variable Collections": {
+                    "value": [
+                      {
+                        "$ref": "#/components/examples/variableCollection/value"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/projectNotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/projectArchived"
+          }
+        }
+      }
+    },
     "/v1/styleguides": {
       "get": {
         "tags": [
@@ -5464,166 +5857,26 @@
         }
       }
     },
-    "/v1/projects/{project_id}/flow_boards": {
+    "/v1/styleguides/{styleguide_id}/variable_collections": {
       "get": {
         "tags": [
-          "Flows"
+          "Variable Collections"
         ],
-        "summary": "Get project flow boards",
-        "description": "List all flow boards in a project.",
-        "operationId": "GetProjectFlowBoards",
+        "summary": "Get styleguide variable collections",
+        "description": "This endpoint returns all of the color variables in a styleguide\n\nYou need to be a member of the styleguide or a member of the organization that owns the styleguide. Returns `Not Found` response otherwise.\n",
+        "operationId": "GetStyleguideVariableCollections",
         "parameters": [
           {
-            "$ref": "#/components/parameters/project_id"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/FlowBoard"
-                  }
-                },
-                "examples": {
-                  "Boards": {
-                    "value": [
-                      {
-                        "$ref": "#/components/examples/flowBoard/value"
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/projectNotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/projectArchived"
-          }
-        }
-      }
-    },
-    "/v1/projects/{project_id}/flow_boards/{flow_board_id}": {
-      "get": {
-        "tags": [
-          "Flows"
-        ],
-        "summary": "Get a single project flow board",
-        "description": "Get flow board details related to a project",
-        "operationId": "GetProjectFlowBoard",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/project_id"
-          },
-          {
-            "$ref": "#/components/parameters/flow_board_id"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FlowBoard"
-                },
-                "examples": {
-                  "Board": {
-                    "$ref": "#/components/examples/flowBoard"
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/projectOrFlowBoardNotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/projectArchived"
-          }
-        }
-      }
-    },
-    "/v1/projects/{project_id}/flow_boards/{flow_board_id}/groups": {
-      "get": {
-        "tags": [
-          "Flows"
-        ],
-        "summary": "Get project flow board groups",
-        "description": "List all flow board groups in a project.",
-        "operationId": "GetProjectFlowBoardGroups",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/project_id"
-          },
-          {
-            "$ref": "#/components/parameters/flow_board_id"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/FlowBoardGroup"
-                  }
-                },
-                "examples": {
-                  "Board Group": {
-                    "value": [
-                      {
-                        "$ref": "#/components/examples/flowBoardGroup/value"
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/projectOrFlowBoardNotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/projectArchived"
-          }
-        }
-      }
-    },
-    "/v1/projects/{project_id}/flow_boards/{flow_board_id}/connectors": {
-      "get": {
-        "tags": [
-          "Flows"
-        ],
-        "summary": "Get project flow board connectors",
-        "description": "List all connectors of the flow board in a project",
-        "operationId": "GetProjectFlowBoardConnectors",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/project_id"
-          },
-          {
-            "$ref": "#/components/parameters/flow_board_id"
-          },
-          {
-            "$ref": "#/components/parameters/starting_node_id"
-          },
-          {
-            "$ref": "#/components/parameters/ending_node_id"
+            "$ref": "#/components/parameters/styleguide_id"
           },
           {
             "$ref": "#/components/parameters/limit"
           },
           {
             "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/include_linked_styleguides"
           }
         ],
         "responses": {
@@ -5634,14 +5887,14 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/FlowBoardConnector"
+                    "$ref": "#/components/schemas/VariableCollection"
                   }
                 },
                 "examples": {
-                  "Board Connectors": {
+                  "Styleguide Variable Collections": {
                     "value": [
                       {
-                        "$ref": "#/components/examples/flowBoardConnector/value"
+                        "$ref": "#/components/examples/variableCollection/value"
                       }
                     ]
                   }
@@ -5650,155 +5903,10 @@
             }
           },
           "404": {
-            "$ref": "#/components/responses/projectNotFound"
+            "$ref": "#/components/responses/styleguideNotFound"
           },
           "422": {
-            "$ref": "#/components/responses/projectArchived"
-          }
-        }
-      }
-    },
-    "/v1/projects/{project_id}/flow_boards/{flow_board_id}/connectors/{connector_id}": {
-      "get": {
-        "tags": [
-          "Flows"
-        ],
-        "summary": "Get a single project flow board connector",
-        "description": "Get details of the project flow board connector",
-        "operationId": "GetProjectFlowBoardConnector",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/project_id"
-          },
-          {
-            "$ref": "#/components/parameters/flow_board_id"
-          },
-          {
-            "$ref": "#/components/parameters/connector_id"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FlowBoardConnector"
-                },
-                "examples": {
-                  "response": {
-                    "$ref": "#/components/examples/flowBoardConnector"
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/projectOrFlowBoardConnectorNotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/projectArchived"
-          }
-        }
-      }
-    },
-    "/v1/projects/{project_id}/flow_boards/{flow_board_id}/nodes": {
-      "get": {
-        "tags": [
-          "Flows"
-        ],
-        "summary": "Get project flow board nodes",
-        "description": "List all nodes of the flow board in a project",
-        "operationId": "GetProjectFlowBoardNodes",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/project_id"
-          },
-          {
-            "$ref": "#/components/parameters/flow_board_id"
-          },
-          {
-            "$ref": "#/components/parameters/group_id"
-          },
-          {
-            "$ref": "#/components/parameters/limit"
-          },
-          {
-            "$ref": "#/components/parameters/offset"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/FlowBoardNode"
-                  }
-                },
-                "examples": {
-                  "Board Nodes": {
-                    "value": [
-                      {
-                        "$ref": "#/components/examples/flowBoardNode/value"
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/projectNotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/projectArchived"
-          }
-        }
-      }
-    },
-    "/v1/projects/{project_id}/flow_boards/{flow_board_id}/nodes/{node_id}": {
-      "get": {
-        "tags": [
-          "Flows"
-        ],
-        "summary": "Get a single project flow board node",
-        "description": "Get details of the project flow board node",
-        "operationId": "GetProjectFlowBoardNode",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/project_id"
-          },
-          {
-            "$ref": "#/components/parameters/flow_board_id"
-          },
-          {
-            "$ref": "#/components/parameters/node_id"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FlowBoardNode"
-                },
-                "examples": {
-                  "response": {
-                    "$ref": "#/components/examples/flowBoardNode"
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/projectOrFlowBoardNodeNotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/projectArchived"
+            "$ref": "#/components/responses/styleguideArchived"
           }
         }
       }
@@ -10315,6 +10423,14 @@
           "project.flow_board"
         ]
       },
+      "VariableValueTypeEnum": {
+        "title": "Source",
+        "type": "string",
+        "description": "Variable value types",
+        "enum": [
+          "color"
+        ]
+      },
       "ColorUpdateBody": {
         "title": "Color Update Body",
         "type": "object",
@@ -11699,6 +11815,185 @@
         },
         "example": {
           "$ref": "#/components/examples/variableInfo"
+        }
+      },
+      "VariableCollection": {
+        "title": "Variable Collection",
+        "type": "object",
+        "required": [
+          "id",
+          "created",
+          "name",
+          "modes",
+          "groups",
+          "source_id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique id of the variable collection"
+          },
+          "created": {
+            "type": "integer",
+            "format": "timestamp",
+            "description": "The unix timestamp when the variable collection was created"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the variable collection"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the variable collection"
+          },
+          "modes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Mode"
+            }
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Group"
+            }
+          },
+          "source_id": {
+            "type": "string",
+            "description": "Variable collection's identifier in the design tool"
+          },
+          "source": {
+            "$ref": "#/components/schemas/ResourceSource",
+            "description": "Source of the variable collection - either `project` or `styleguide`."
+          }
+        },
+        "example": {
+          "$ref": "#/components/examples/variableCollection"
+        }
+      },
+      "Mode": {
+        "title": "Mode",
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "mode_id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the mode"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the mode"
+          },
+          "mode_id": {
+            "type": "string",
+            "description": "Mode's identifier in the design tool"
+          }
+        },
+        "example": {
+          "$ref": "#/components/examples/mode"
+        }
+      },
+      "Group": {
+        "title": "Group",
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "variables"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the color"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the color"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the color"
+          },
+          "parent": {
+            "type": "string",
+            "description": "Parent group of the group"
+          },
+          "variables": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Variable"
+            }
+          }
+        },
+        "example": {
+          "$ref": "#/components/examples/group"
+        }
+      },
+      "VariableValue": {
+        "title": "Variable value",
+        "type": "object",
+        "required": [
+          "mode_id",
+          "type",
+          "color"
+        ],
+        "properties": {
+          "mode_id": {
+            "type": "string",
+            "description": "Mode id of the variable value"
+          },
+          "type": {
+            "$ref": "#/components/schemas/VariableValueTypeEnum",
+            "description": "Type of the variable value"
+          },
+          "color": {
+            "$ref": "#/components/schemas/ColorData",
+            "description": "Color value of the variable"
+          }
+        },
+        "example": {
+          "$ref": "#/components/examples/variableValue"
+        }
+      },
+      "Variable": {
+        "title": "Variable",
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "source_id",
+          "values"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique id of the variable"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the variable"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the variable"
+          },
+          "source_id": {
+            "type": "string",
+            "description": "Variable's identifier in the design tool"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VariableValue"
+            }
+          }
+        },
+        "example": {
+          "$ref": "#/components/examples/variable"
         }
       },
       "WebhookEvent": {
@@ -16963,6 +17258,18 @@
           }
         }
       },
+      "group": {
+        "summary": "Group",
+        "value": {
+          "id": "666062f07fe9b31970400139",
+          "name": "default",
+          "variables": [
+            {
+              "$ref": "#/components/examples/variable/value"
+            }
+          ]
+        }
+      },
       "layer": {
         "summary": "Layer",
         "value": {
@@ -17095,6 +17402,14 @@
           "emotar": "🍎",
           "avatar": "http://placekitten.com/200/300",
           "last_seen": 1616739240
+        }
+      },
+      "mode": {
+        "summary": "Mode",
+        "value": {
+          "id": "666062f07fe9b31970400138",
+          "name": "Mode 1",
+          "mode_id": "69:0"
         }
       },
       "notification": {
@@ -18110,11 +18425,52 @@
           "last_seen": 1616739240
         }
       },
+      "variable": {
+        "summary": "Variable",
+        "value": {
+          "id": "666062f07fe9b3197040013e",
+          "name": "Black",
+          "source_id": "d36cffd7c2da067c567ecc4ece9ad5fafff6ec7c",
+          "values": [
+            {
+              "$ref": "#/components/examples/variableValue/value"
+            }
+          ]
+        }
+      },
+      "variableCollection": {
+        "summary": "Variable Collection",
+        "value": {
+          "id": "6662b9998f1d57de4566e868",
+          "created": 1717746073,
+          "name": "Fundamentals",
+          "source_id": "4ba9866092495c104742f0959edbaa8bfa35e483",
+          "modes": {
+            "$ref": "#/components/examples/mode"
+          },
+          "groups": {
+            "$ref": "#/components/examples/group"
+          }
+        }
+      },
       "variableInfo": {
         "summary": "Variable Info",
         "value": {
           "source_id": "280c52e619f9c84a4e5e265bb746ede50d898cb3",
           "collection_source_id": "4af2ee68305a9b4f0c655141e7ba01a51ab61bde"
+        }
+      },
+      "variableValue": {
+        "summary": "Variable value",
+        "value": {
+          "mode_id": "666062f07fe9b31970400138",
+          "type": "color",
+          "color": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 1
+          }
         }
       },
       "versionCommit": {
