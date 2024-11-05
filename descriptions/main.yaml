@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Zeplin API
   description: Access your resources in Zeplin
-  version: 1.23.0
+  version: 1.24.0
   contact:
     name: Zeplin
     url: https://zeplin.io
