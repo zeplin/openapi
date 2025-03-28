@@ -3,7 +3,7 @@
   "info": {
     "title": "Zeplin API",
     "description": "Access your resources in Zeplin",
-    "version": "1.27.0",
+    "version": "1.28.0",
     "contact": {
       "name": "Zeplin",
       "url": "https://zeplin.io",
@@ -3556,6 +3556,9 @@
             "$ref": "#/components/parameters/project_id"
           },
           {
+            "$ref": "#/components/parameters/filter_by_page_id"
+          },
+          {
             "$ref": "#/components/parameters/limit"
           },
           {
@@ -3578,6 +3581,57 @@
                     "value": [
                       {
                         "$ref": "#/components/examples/componentSection/value"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/projectNotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/projectArchived"
+          }
+        }
+      }
+    },
+    "/v1/projects/{project_id}/pages": {
+      "get": {
+        "tags": [
+          "Components"
+        ],
+        "summary": "Get project pages",
+        "description": "List all pages of the project",
+        "operationId": "GetProjectPages",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/project_id"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Page"
+                  }
+                },
+                "examples": {
+                  "Project Pages": {
+                    "value": [
+                      {
+                        "$ref": "#/components/examples/page/value"
                       }
                     ]
                   }
@@ -5393,6 +5447,9 @@
             "$ref": "#/components/parameters/styleguide_id"
           },
           {
+            "$ref": "#/components/parameters/filter_by_page_id"
+          },
+          {
             "$ref": "#/components/parameters/limit"
           },
           {
@@ -5419,6 +5476,57 @@
                 "examples": {
                   "response": {
                     "$ref": "#/components/examples/componentSection"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/styleguideNotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/styleguideArchived"
+          }
+        }
+      }
+    },
+    "/v1/styleguides/{styleguide_id}/pages": {
+      "get": {
+        "tags": [
+          "Components"
+        ],
+        "summary": "Get styleguide pages",
+        "description": "List all pages of the styleguide",
+        "operationId": "GetStyleguidePages",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/styleguide_id"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Page"
+                  }
+                },
+                "examples": {
+                  "Styleguide Pages": {
+                    "value": [
+                      {
+                        "$ref": "#/components/examples/page/value"
+                      }
+                    ]
                   }
                 }
               }
@@ -11996,6 +12104,44 @@
           "$ref": "#/components/examples/variable"
         }
       },
+      "Page": {
+        "title": "Page",
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "type",
+          "componentSections"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique id of the page"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the page"
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of the page"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the page"
+          },
+          "componentSections": {
+            "type": "array",
+            "description": "Array of component section IDs",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "example": {
+          "$ref": "#/components/examples/page"
+        }
+      },
       "WebhookEvent": {
         "title": "Webhook Event",
         "discriminator": {
@@ -18561,6 +18707,19 @@
           "website": "https://zeplin.io/",
           "logo": "http://placekitten.com/32/32"
         }
+      },
+      "page": {
+        "summary": "Page",
+        "value": {
+          "id": "5db81e73e1e36ee19f138c1a",
+          "created": 1572347507,
+          "name": "New Page",
+          "type": "default",
+          "description": "New page description",
+          "componentSections": [
+            "5db81e73e1e35ee19f138c2d"
+          ]
+        }
       }
     },
     "parameters": {
@@ -19022,6 +19181,16 @@
           "items": {
             "type": "string"
           }
+        }
+      },
+      "filter_by_page_id": {
+        "name": "page_id",
+        "in": "query",
+        "description": "Filter by page id",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "pattern": "/^[0-9a-f]{24}$/i"
         }
       }
     },
