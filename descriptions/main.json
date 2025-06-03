@@ -3,7 +3,7 @@
   "info": {
     "title": "Zeplin API",
     "description": "Access your resources in Zeplin",
-    "version": "1.28.0",
+    "version": "1.29.0",
     "contact": {
       "name": "Zeplin",
       "url": "https://zeplin.io",
@@ -1501,11 +1501,6 @@
                   "Project already has styleguide": {
                     "value": {
                       "message": "Project already has a linked styleguide. Only projects without a linked styleguide can be linked to a styleguide"
-                    }
-                  },
-                  "Invalid styleguide project type": {
-                    "value": {
-                      "message": "Styleguide type is not compatible with the project type"
                     }
                   },
                   "User not have styleguide": {
@@ -11957,13 +11952,13 @@
           "modes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Mode"
+              "$ref": "#/components/schemas/VariableMode"
             }
           },
           "groups": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Group"
+              "$ref": "#/components/schemas/VariableGroup"
             }
           },
           "source_id": {
@@ -11979,8 +11974,8 @@
           "$ref": "#/components/examples/variableCollection"
         }
       },
-      "Mode": {
-        "title": "Mode",
+      "VariableMode": {
+        "title": "Variable Mode",
         "type": "object",
         "required": [
           "id",
@@ -12002,11 +11997,11 @@
           }
         },
         "example": {
-          "$ref": "#/components/examples/mode"
+          "$ref": "#/components/examples/variableMode"
         }
       },
-      "Group": {
-        "title": "Group",
+      "VariableGroup": {
+        "title": "Variable Group",
         "type": "object",
         "required": [
           "id",
@@ -12038,7 +12033,7 @@
           }
         },
         "example": {
-          "$ref": "#/components/examples/group"
+          "$ref": "#/components/examples/variableGroup"
         }
       },
       "VariableValue": {
@@ -17404,18 +17399,6 @@
           }
         }
       },
-      "group": {
-        "summary": "Group",
-        "value": {
-          "id": "666062f07fe9b31970400139",
-          "name": "default",
-          "variables": [
-            {
-              "$ref": "#/components/examples/variable/value"
-            }
-          ]
-        }
-      },
       "layer": {
         "summary": "Layer",
         "value": {
@@ -17548,14 +17531,6 @@
           "emotar": "🍎",
           "avatar": "http://placekitten.com/200/300",
           "last_seen": 1616739240
-        }
-      },
-      "mode": {
-        "summary": "Mode",
-        "value": {
-          "id": "666062f07fe9b31970400138",
-          "name": "Mode 1",
-          "mode_id": "69:0"
         }
       },
       "notification": {
@@ -18592,10 +18567,10 @@
           "name": "Fundamentals",
           "source_id": "4ba9866092495c104742f0959edbaa8bfa35e483",
           "modes": {
-            "$ref": "#/components/examples/mode"
+            "$ref": "#/components/examples/variableMode"
           },
           "groups": {
-            "$ref": "#/components/examples/group"
+            "$ref": "#/components/examples/variableGroup"
           }
         }
       },
@@ -18604,6 +18579,26 @@
         "value": {
           "source_id": "280c52e619f9c84a4e5e265bb746ede50d898cb3",
           "collection_source_id": "4af2ee68305a9b4f0c655141e7ba01a51ab61bde"
+        }
+      },
+      "variableGroup": {
+        "summary": "Variable Group",
+        "value": {
+          "id": "666062f07fe9b31970400139",
+          "name": "default",
+          "variables": [
+            {
+              "$ref": "#/components/examples/variable/value"
+            }
+          ]
+        }
+      },
+      "variableMode": {
+        "summary": "Variable Mode",
+        "value": {
+          "id": "666062f07fe9b31970400138",
+          "name": "Mode 1",
+          "mode_id": "69:0"
         }
       },
       "variableValue": {
