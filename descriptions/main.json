@@ -3,7 +3,7 @@
   "info": {
     "title": "Zeplin API",
     "description": "Access your resources in Zeplin",
-    "version": "1.29.0",
+    "version": "1.30.0",
     "contact": {
       "name": "Zeplin",
       "url": "https://zeplin.io",
@@ -7124,6 +7124,7 @@
       "ScreenNote": {
         "title": "Screen Note",
         "type": "object",
+        "description": "Screen notes are comments added to a screen and can be either point notes, which have a single point in the position field, or area notes, which have a position field containing both a start and end point to define a rectangular region.\n",
         "required": [
           "id",
           "order",
@@ -7216,10 +7217,20 @@
         ],
         "properties": {
           "x": {
-            "type": "number"
+            "type": "number",
+            "description": "The X-coordinate of the note's position. For area notes, this represents the X-coordinate of the end point."
           },
           "y": {
-            "type": "number"
+            "type": "number",
+            "description": "The Y-coordinate of the note's position. For area notes, this represents the Y-coordinate of the end point."
+          },
+          "x_start": {
+            "type": "number",
+            "description": "The X-coordinate of the start point for area notes. Ignored for point notes."
+          },
+          "y_start": {
+            "type": "number",
+            "description": "The Y-coordinate of the start point for area notes. Ignored for point notes."
           }
         },
         "example": {
@@ -8911,7 +8922,8 @@
           "id",
           "content",
           "author",
-          "updated"
+          "updated",
+          "reactions"
         ],
         "properties": {
           "id": {
@@ -8929,6 +8941,17 @@
             "type": "integer",
             "format": "timestamp",
             "description": "The unix timestamp when the comment was updated"
+          },
+          "reactions": {
+            "type": "array",
+            "description": "Reactions to the comment",
+            "items": {
+              "$ref": "#/components/schemas/Reaction"
+            }
+          },
+          "screen_version_id": {
+            "type": "string",
+            "description": "The version of the screen this comment is associated with"
           }
         },
         "example": {
@@ -10420,6 +10443,7 @@
           "project.member",
           "project.note",
           "project.note.comment",
+          "project.note.comment.reaction",
           "project.screen",
           "project.screen.version",
           "project.spacing_token",
@@ -10450,6 +10474,7 @@
           "project.member",
           "project.note",
           "project.note.comment",
+          "project.note.comment.reaction",
           "project.screen",
           "project.screen.version",
           "project.spacing_token",
@@ -10478,6 +10503,7 @@
           "project.member",
           "project.note",
           "project.note.comment",
+          "project.note.comment.reaction",
           "project.screen",
           "project.screen.version",
           "project.spacing_token",
@@ -12137,6 +12163,38 @@
           "$ref": "#/components/examples/page"
         }
       },
+      "Reaction": {
+        "title": "Reaction",
+        "type": "object",
+        "required": [
+          "id",
+          "short_code",
+          "users"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique id of the reaction"
+          },
+          "short_code": {
+            "type": "string",
+            "description": "Type of the reaction (e.g., thumbsup, eyes, etc.)"
+          },
+          "unicode": {
+            "type": "string",
+            "description": "Unicode representation of the reaction"
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        },
+        "example": {
+          "$ref": "#/components/examples/reaction"
+        }
+      },
       "WebhookEvent": {
         "title": "Webhook Event",
         "discriminator": {
@@ -12153,6 +12211,7 @@
             "project.screen.version": "#/components/schemas/ProjectScreenVersionEvent",
             "project.note": "#/components/schemas/ProjectNoteEvent",
             "project.note.comment": "#/components/schemas/ProjectNoteCommentEvent",
+            "project.note.comment.reaction": "#/components/schemas/ProjectNoteCommentReactionEvent",
             "project.color": "#/components/schemas/ProjectColorEvent",
             "project.flow_board": "#/components/schemas/ProjectFlowBoardEvent",
             "project.text_style": "#/components/schemas/ProjectTextStyleEvent",
@@ -12195,6 +12254,9 @@
           },
           {
             "$ref": "#/components/schemas/ProjectNoteCommentEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ProjectNoteCommentReactionEvent"
           },
           {
             "$ref": "#/components/schemas/ProjectColorEvent"
@@ -14650,6 +14712,163 @@
           },
           "context": {
             "$ref": "#/components/schemas/ProjectNoteCommentEventContext"
+          },
+          "actor": {
+            "$ref": "#/components/schemas/WebhookEventActor"
+          }
+        }
+      },
+      "ProjectNoteCommentReactionEvent": {
+        "title": "Project Note Comment Reaction Event",
+        "description": "This event is used to notify webhooks about reactions to comments in notes in Zeplin projects.",
+        "discriminator": {
+          "propertyName": "action",
+          "mapping": {
+            "created": "#/components/schemas/ProjectNoteCommentReactionCreatedEvent",
+            "deleted": "#/components/schemas/ProjectNoteCommentReactionDeletedEvent"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ProjectNoteCommentReactionCreatedEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ProjectNoteCommentReactionDeletedEvent"
+          }
+        ]
+      },
+      "ProjectNoteCommentReactionEventContext": {
+        "title": "Project Note Comment Reaction Event Context",
+        "type": "object",
+        "required": [
+          "project",
+          "screen",
+          "note",
+          "comment"
+        ],
+        "properties": {
+          "project": {
+            "description": "Project in which the reaction has been added",
+            "$ref": "#/components/schemas/Project"
+          },
+          "screen": {
+            "description": "Screen in which the reaction has been added",
+            "$ref": "#/components/schemas/Screen"
+          },
+          "note": {
+            "description": "Note in which the reaction has been added",
+            "$ref": "#/components/schemas/ScreenNote"
+          },
+          "comment": {
+            "description": "Comment in which the reaction has been added",
+            "$ref": "#/components/schemas/ScreenNoteComment"
+          }
+        }
+      },
+      "ProjectNoteCommentReactionCreatedEvent": {
+        "title": "Project Note Comment Reaction Created Event",
+        "type": "object",
+        "required": [
+          "event",
+          "action",
+          "timestamp",
+          "resource",
+          "actor",
+          "context"
+        ],
+        "properties": {
+          "event": {
+            "type": "string",
+            "enum": [
+              "project.note.comment.reaction"
+            ]
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "created"
+            ]
+          },
+          "timestamp": {
+            "type": "number"
+          },
+          "resource": {
+            "type": "object",
+            "required": [
+              "id",
+              "type",
+              "data"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "Reaction"
+                ]
+              },
+              "data": {
+                "$ref": "#/components/schemas/Reaction"
+              }
+            }
+          },
+          "context": {
+            "$ref": "#/components/schemas/ProjectNoteCommentReactionEventContext"
+          },
+          "actor": {
+            "$ref": "#/components/schemas/WebhookEventActor"
+          }
+        }
+      },
+      "ProjectNoteCommentReactionDeletedEvent": {
+        "title": "Project Note Comment Reaction Deleted Event",
+        "type": "object",
+        "required": [
+          "event",
+          "action",
+          "timestamp",
+          "resource",
+          "actor",
+          "context"
+        ],
+        "properties": {
+          "event": {
+            "type": "string",
+            "enum": [
+              "project.note.comment.reaction"
+            ]
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "deleted"
+            ]
+          },
+          "timestamp": {
+            "type": "number"
+          },
+          "resource": {
+            "type": "object",
+            "required": [
+              "id",
+              "type"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "Reaction"
+                ]
+              }
+            }
+          },
+          "context": {
+            "$ref": "#/components/schemas/ProjectNoteCommentReactionEventContext"
           },
           "actor": {
             "$ref": "#/components/schemas/WebhookEventActor"
@@ -17938,13 +18157,21 @@
             "$ref": "#/components/examples/user/value"
           },
           "content": "Hey ho! Let's go!",
-          "updated": 1572347818
+          "updated": 1572347818,
+          "reactions": [
+            {
+              "$ref": "#/components/examples/reaction/value"
+            }
+          ],
+          "screen_version_id": "5dbad85a89ea51c1f35bcfff"
         }
       },
       "screenNotePosition": {
         "value": {
           "x": 0.93,
-          "y": 0.1
+          "y": 0.1,
+          "x_start": 0.9,
+          "y_start": 0.05
         }
       },
       "screenAnnotation": {
@@ -18713,6 +18940,19 @@
           "description": "New page description",
           "componentSections": [
             "5db81e73e1e35ee19f138c2d"
+          ]
+        }
+      },
+      "reaction": {
+        "summary": "Reaction",
+        "value": {
+          "id": "5dbad85a89ea51c1f35bcffe",
+          "short_code": "thumbsup",
+          "unicode": "👍",
+          "users": [
+            {
+              "$ref": "#/components/examples/user/value"
+            }
           ]
         }
       }
