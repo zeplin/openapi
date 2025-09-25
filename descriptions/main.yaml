@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Zeplin API
   description: Access your resources in Zeplin
-  version: 1.31.0
+  version: 1.32.0
   contact:
     name: Zeplin
     url: https://zeplin.io
@@ -4705,6 +4705,10 @@ components:
           allOf:
             - $ref: "#/components/schemas/SourceEnum"
             - description: Source application of the version
+        source_file_url:
+          type: string
+          format: url
+          description: Source file url of the version
         width:
           type: integer
           description: Width of the version
@@ -4769,6 +4773,10 @@ components:
           allOf:
             - $ref: "#/components/schemas/SourceEnum"
             - description: Source application of the version
+        source_file_url:
+          type: string
+          format: url
+          description: Source file url of the version
         width:
           type: integer
           description: Width of the version
@@ -5231,6 +5239,10 @@ components:
           allOf:
             - $ref: "#/components/schemas/SourceEnum"
             - description: Source application of the version
+        source_file_url:
+          type: string
+          format: url
+          description: Source file url of the version
         width:
           type: integer
           description: Width of the version
@@ -5294,6 +5306,10 @@ components:
           allOf:
             - $ref: "#/components/schemas/SourceEnum"
             - description: Source application of the version
+        source_file_url:
+          type: string
+          format: url
+          description: Source file url of the version
         width:
           type: integer
           description: Width of the version
@@ -11867,7 +11883,8 @@ components:
         width: 2560
         height: 1920
         density_scale: 2
-        source: sketch
+        source: figma
+        source_file_url: https://www.figma.com/file/fileId/session?node-id=nodeId
         background_color:
           $ref: "#/components/examples/colorData/value"
         links:
@@ -11890,6 +11907,7 @@ components:
         height: 256
         density_scale: 2
         source: sketch
+        source_file_url: https://www.sketch.com/s/shareId
         background_color:
           $ref: "#/components/examples/colorData/value"
         links:
@@ -12490,7 +12508,8 @@ components:
         width: 2560
         height: 1920
         density_scale: 2
-        source: sketch/value
+        source: figma/value
+        source_file_url: https://www.figma.com/file/fileId/session?node-id=nodeId
         background_color:
           $ref: "#/components/examples/colorData/value"
         links:
@@ -12514,6 +12533,7 @@ components:
         height: 1920
         density_scale: 2
         source: sketch/value
+        source_file_url: https://www.sketch.com/s/shareId
         background_color:
           $ref: "#/components/examples/colorData/value"
         links:
