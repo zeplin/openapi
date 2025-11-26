@@ -3,7 +3,7 @@
   "info": {
     "title": "Zeplin API",
     "description": "Access your resources in Zeplin",
-    "version": "1.34.0",
+    "version": "1.35.0",
     "contact": {
       "name": "Zeplin",
       "url": "https://zeplin.io",
@@ -11711,7 +11711,8 @@
             "ScreenNode": "#/components/schemas/FlowBoardScreenNode",
             "TextLabelNode": "#/components/schemas/FlowBoardTextNode",
             "VariantGroupNode": "#/components/schemas/FlowBoardVariantGroupNode",
-            "ShapeNode": "#/components/schemas/FlowBoardShapeNode"
+            "ShapeNode": "#/components/schemas/FlowBoardShapeNode",
+            "AnnotationNode": "#/components/schemas/FlowBoardAnnotationNode"
           }
         },
         "oneOf": [
@@ -11726,6 +11727,9 @@
           },
           {
             "$ref": "#/components/schemas/FlowBoardShapeNode"
+          },
+          {
+            "$ref": "#/components/schemas/FlowBoardAnnotationNode"
           }
         ],
         "x-examples": {
@@ -11740,6 +11744,9 @@
           },
           "Board Shape Node": {
             "$ref": "#/components/examples/flowBoardShapeNode"
+          },
+          "Board Annotation Node": {
+            "$ref": "#/components/examples/flowBoardAnnotationNode"
           }
         }
       },
@@ -11894,6 +11901,73 @@
         },
         "example": {
           "$ref": "#/components/examples/flowBoardVariantGroupNode"
+        }
+      },
+      "FlowBoardAnnotationNode": {
+        "title": "Flow Board Annotation Node",
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "position",
+          "width",
+          "height",
+          "color",
+          "font_size",
+          "font_type",
+          "text"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique id of the screen node"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "AnnotationNode"
+            ]
+          },
+          "position": {
+            "$ref": "#/components/schemas/FlowBoardPosition"
+          },
+          "width": {
+            "type": "number"
+          },
+          "height": {
+            "type": "number"
+          },
+          "color": {
+            "$ref": "#/components/schemas/FlowBoardNodeColor"
+          },
+          "font_size": {
+            "type": "string",
+            "enum": [
+              "small",
+              "medium",
+              "large",
+              "xlarge"
+            ]
+          },
+          "font_type": {
+            "type": "string",
+            "enum": [
+              "simple",
+              "book-style",
+              "technical",
+              "handwritten"
+            ]
+          },
+          "text": {
+            "type": "string",
+            "description": "The text content of the annotation"
+          },
+          "note_type": {
+            "$ref": "#/components/schemas/ScreenAnnotationNoteType"
+          }
+        },
+        "example": {
+          "$ref": "#/components/examples/flowBoardAnnotationNode"
         }
       },
       "FlowBoardPosition": {
@@ -17136,6 +17210,28 @@
           "position": {
             "x": 23,
             "y": 45
+          }
+        }
+      },
+      "flowBoardAnnotationNode": {
+        "summary": "Flow Board Annotation Node",
+        "value": {
+          "id": "610cd30ff252160033aa5ab9",
+          "type": "AnnotationNode",
+          "text": "Example Annotation",
+          "width": 100,
+          "height": 100,
+          "color": {
+            "$ref": "#/components/examples/flowBoardNodeColor/value"
+          },
+          "position": {
+            "x": 23,
+            "y": 45
+          },
+          "font_size": "small",
+          "font_type": "simple",
+          "note_type": {
+            "$ref": "#/components/examples/screenAnnotationNoteType/value"
           }
         }
       },
