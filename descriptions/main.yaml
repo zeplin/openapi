@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Zeplin API
   description: Access your resources in Zeplin
-  version: 1.35.0
+  version: 1.36.0
   contact:
     name: Zeplin
     url: https://zeplin.io
@@ -4522,6 +4522,9 @@ components:
           $ref: "#/components/schemas/ScreenAnnotationPosition"
         creator:
           $ref: "#/components/schemas/User"
+        updated_by:
+          $ref: "#/components/schemas/User"
+          description: The user who last updated the content of the annotation
         updated:
           type: integer
           format: timestamp
@@ -12535,6 +12538,8 @@ components:
         position:
           $ref: "#/components/examples/screenAnnotationPosition/value"
         creator:
+          $ref: "#/components/examples/user/value"
+        updated_by:
           $ref: "#/components/examples/user/value"
         updated: 1680719128
         created: 1680719128
