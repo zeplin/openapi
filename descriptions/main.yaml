@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Zeplin API
   description: Access your resources in Zeplin
-  version: 1.38.0
+  version: 1.39.0
   contact:
     name: Zeplin
     url: https://zeplin.io
@@ -5516,6 +5516,68 @@ components:
         component_name:
           type: string
           description: Name of the component the group layer is referencing
+        layout:
+          $ref: "#/components/schemas/LayerLayout"
+          description: Auto layout settings of the group layer
+        constraints:
+          $ref: "#/components/schemas/LayerConstraints"
+          description: Resizing constraints of the layer relative to its parent
+        corner_radius:
+          $ref: "#/components/schemas/LayerCornerRadius"
+          description: Per-corner border radius of the layer
+        layout_alignment:
+          type: string
+          enum:
+            - min
+            - center
+            - max
+            - stretch
+            - inherit
+            - baseline
+          description: Alignment of the layer within its parent's auto layout
+        layout_grow:
+          type: number
+          description: Factor by which the layer grows to fill its parent's auto layout
+        grid_child_horizontal_alignment:
+          type: string
+          enum:
+            - center
+            - max
+            - min
+            - auto
+          description: Horizontal alignment of the layer within its parent's grid cell
+        grid_child_vertical_alignment:
+          type: string
+          enum:
+            - center
+            - max
+            - min
+            - auto
+          description: Vertical alignment of the layer within its parent's grid cell
+        grid_column_index:
+          type: integer
+          description: Column index of the layer within its parent's grid
+        grid_column_span:
+          type: integer
+          description: Number of columns the layer spans within its parent's grid
+        grid_row_index:
+          type: integer
+          description: Row index of the layer within its parent's grid
+        grid_row_span:
+          type: integer
+          description: Number of rows the layer spans within its parent's grid
+        min_width:
+          type: number
+          description: Minimum width of the layer
+        max_width:
+          type: number
+          description: Maximum width of the layer
+        min_height:
+          type: number
+          description: Minimum height of the layer
+        max_height:
+          type: number
+          description: Maximum height of the layer
       example:
         $ref: "#/components/examples/layer"
     Gradient:
@@ -5659,6 +5721,164 @@ components:
           description: Length of the range
       example:
         $ref: "#/components/examples/layerTextStyle"
+    LayerLayout:
+      title: Layer Layout
+      type: object
+      description: Auto layout (and grid layout) settings applied to the group layer
+      properties:
+        direction:
+          type: string
+          enum:
+            - row
+            - column
+            - grid
+          description: Direction the children are laid out in
+        distribution:
+          type: string
+          enum:
+            - min
+            - center
+            - max
+            - space-between
+          description: Distribution of the children along the layout direction
+        gap:
+          type: number
+          description: Gap between the children
+        item_alignment:
+          type: string
+          enum:
+            - min
+            - center
+            - max
+            - stretch
+            - inherit
+            - baseline
+          description: Alignment of the children across the layout direction
+        padding:
+          type: object
+          description: Padding around the children
+          properties:
+            top:
+              type: number
+            right:
+              type: number
+            bottom:
+              type: number
+            left:
+              type: number
+        wrap:
+          type: boolean
+          description: Indicates whether the children wrap onto multiple lines
+        wrap_gap:
+          type: number
+          description: Gap between the wrapped lines
+        column_count:
+          type: number
+          description: Number of columns, for grid layouts
+        column_gap:
+          type: number
+          description: Gap between the columns, for grid layouts
+        row_count:
+          type: number
+          description: Number of rows, for grid layouts
+        row_gap:
+          type: number
+          description: Gap between the rows, for grid layouts
+        column_sizes:
+          type: array
+          description: Sizes of the columns, for grid layouts
+          items:
+            $ref: "#/components/schemas/LayerGridSize"
+        row_sizes:
+          type: array
+          description: Sizes of the rows, for grid layouts
+          items:
+            $ref: "#/components/schemas/LayerGridSize"
+      example:
+        $ref: "#/components/examples/layerLayout"
+    LayerGridSize:
+      title: Layer Grid Size
+      type: object
+      description: Size of a column or row in a grid layout
+      properties:
+        type:
+          type: string
+          enum:
+            - fixed
+            - flex
+          description: Type of the grid track size
+        value:
+          type: number
+          description: Size value of the grid track
+      example:
+        $ref: "#/components/examples/layerGridSize"
+    LayerConstraints:
+      title: Layer Constraints
+      type: object
+      description: Resizing constraints of the layer relative to its parent
+      properties:
+        relative_to:
+          type: string
+          description: Identifier of the layer the constraints are relative to
+        horizontal:
+          type: object
+          description: Horizontal resizing constraint
+          properties:
+            sizing_mode:
+              type: string
+              enum:
+                - fixed
+                - stretch
+                - hug-contents
+              description: Sizing mode of the layer along the axis
+            min:
+              type: boolean
+              description: Indicates whether the layer is pinned to the minimum edge of the
+                axis
+            max:
+              type: boolean
+              description: Indicates whether the layer is pinned to the maximum edge of the
+                axis
+        vertical:
+          type: object
+          description: Vertical resizing constraint
+          properties:
+            sizing_mode:
+              type: string
+              enum:
+                - fixed
+                - stretch
+                - hug-contents
+              description: Sizing mode of the layer along the axis
+            min:
+              type: boolean
+              description: Indicates whether the layer is pinned to the minimum edge of the
+                axis
+            max:
+              type: boolean
+              description: Indicates whether the layer is pinned to the maximum edge of the
+                axis
+      example:
+        $ref: "#/components/examples/layerConstraints"
+    LayerCornerRadius:
+      title: Layer Corner Radius
+      type: object
+      description: Per-corner border radius of the layer
+      properties:
+        top_left:
+          type: number
+          description: Radius of the top-left corner
+        top_right:
+          type: number
+          description: Radius of the top-right corner
+        bottom_right:
+          type: number
+          description: Radius of the bottom-right corner
+        bottom_left:
+          type: number
+          description: Radius of the bottom-left corner
+      example:
+        $ref: "#/components/examples/layerCornerRadius"
     Asset:
       title: Asset
       type: object
@@ -12124,30 +12344,73 @@ components:
     layer:
       summary: Layer
       value:
-        id: 5db81e73e1e36ee19f138c1a
-        source_id: 2FF14739-F1CD-4221-A9C1-0EA296C67AD1
-        type: shape
-        name: First rectangle in group
+        id: 5db81e73e1e36ee19f138c1b
+        source_id: 96:4003
+        type: group
+        name: Frame
         rect:
           x: 0
           y: 0
           width: 40
-          height: 40
+          height: 98
           absolute:
             x: 0
             y: 0
-        fills:
-          - $ref: "#/components/examples/layerFill/value"
-        borders:
-          - thickness: 1
-            position: inside
-            fill:
-              $ref: "#/components/examples/layerFill/value"
         opacity: 1
         blend_mode: normal
         border_radius: 0
         rotation: 0
         exportable: false
+        layout:
+          direction: column
+          distribution: min
+          gap: 18
+          item_alignment: stretch
+          padding:
+            top: 0
+            right: 0
+            bottom: 0
+            left: 0
+        constraints:
+          horizontal:
+            sizing_mode: stretch
+          vertical:
+            sizing_mode: hug-contents
+        layers:
+          - id: 5db81e73e1e36ee19f138c1a
+            source_id: 2FF14739-F1CD-4221-A9C1-0EA296C67AD1
+            type: shape
+            name: First rectangle in group
+            rect:
+              x: 0
+              y: 0
+              width: 40
+              height: 40
+              absolute:
+                x: 0
+                y: 0
+            fills:
+              - $ref: "#/components/examples/layerFill/value"
+            borders:
+              - thickness: 1
+                position: inside
+                fill:
+                  $ref: "#/components/examples/layerFill/value"
+            opacity: 1
+            blend_mode: normal
+            border_radius: 0
+            rotation: 0
+            exportable: false
+            constraints:
+              horizontal:
+                sizing_mode: fixed
+              vertical:
+                sizing_mode: fixed
+            corner_radius:
+              top_left: 0
+              top_right: 0
+              bottom_right: 0
+              bottom_left: 0
     layerBlur:
       summary: Layer Blur
       value:
@@ -12160,12 +12423,43 @@ components:
         position: inside
         fill:
           $ref: "#/components/examples/layerFill/value"
+    layerConstraints:
+      summary: Layer Constraints
+      value:
+        horizontal:
+          sizing_mode: stretch
+        vertical:
+          sizing_mode: hug-contents
+    layerCornerRadius:
+      summary: Layer Corner Radius
+      value:
+        top_left: 6
+        top_right: 6
+        bottom_right: 6
+        bottom_left: 6
     layerFill:
       summary: Layer Fill
       value:
         type: color
         color:
           $ref: "#/components/examples/colorData/value"
+    layerGridSize:
+      summary: Layer Grid Size
+      value:
+        type: fixed
+        value: 100
+    layerLayout:
+      summary: Layer Layout
+      value:
+        direction: column
+        distribution: min
+        gap: 18
+        item_alignment: stretch
+        padding:
+          top: 0
+          right: 0
+          bottom: 0
+          left: 0
     layerPosition:
       summary: Position
       value:
