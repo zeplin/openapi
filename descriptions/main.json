@@ -3,7 +3,7 @@
   "info": {
     "title": "Zeplin API",
     "description": "Access your resources in Zeplin",
-    "version": "1.39.0",
+    "version": "1.40.0",
     "contact": {
       "name": "Zeplin",
       "url": "https://zeplin.io",
@@ -7309,11 +7309,6 @@
       "ScreenAnnotationNoteType": {
         "title": "Screen Annotation Note Type",
         "type": "object",
-        "required": [
-          "id",
-          "name",
-          "color"
-        ],
         "properties": {
           "id": {
             "type": "string",
